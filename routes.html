@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sincro-Ruta - Rutas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logisyn Logo" class="logo">
+                <h3>Sincro-Ruta</h3>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="routes.html" class="active">Rutas</a></li>
+                    <li><a href="vehicles.html">Vehículos</a></li>
+                    <li><a href="operators.html">Operadores</a></li>
+                    <li><a href="#">Historial</a></li>
+                    <li><a href="#">Configuración</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Gestión de Rutas</h1>
+                <div class="user-info">
+                    <p>Bienvenido, <span id="user-name">Usuario</span></p>
+                </div>
+            </header>
+
+            <section class="route-planning">
+                <div class="route-form">
+                    <h3>Crear Nueva Ruta</h3>
+                    <form>
+                        <div class="input-group">
+                            <label for="routeName">Nombre de la Ruta:</label>
+                            <input type="text" id="routeName" name="routeName">
+                        </div>
+                        <div class="input-group">
+                            <label for="routeOperator">Operador:</label>
+                            <select id="routeOperator" name="routeOperator">
+                                <option value="">Seleccione un operador</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="routeDate">Fecha de Inicio:</label>
+                            <input type="date" id="routeDate" name="routeDate">
+                        </div>
+                        <button type="submit" class="btn-primary">Guardar Ruta</button>
+                    </form>
+                </div>
+                <div class="route-map-section">
+                    <h3>Mapa de la Ruta</h3>
+                    <div class="map-placeholder">
+                        Mapa de ruta con puntos de entrega
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

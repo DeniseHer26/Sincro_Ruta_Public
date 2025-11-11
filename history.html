@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sincro-Ruta - Historial</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logisyn Logo" class="logo">
+                <h3>Sincro-Ruta</h3>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="routes.html">Rutas</a></li>
+                    <li><a href="vehicles.html">Vehículos</a></li>
+                    <li><a href="operators.html">Operadores</a></li>
+                    <li><a href="history.html" class="active">Historial</a></li>
+                    <li><a href="settings.html">Configuración</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Historial de Operaciones</h1>
+                <div class="user-info">
+                    <p>Bienvenido, <span id="user-name">Usuario</span></p>
+                </div>
+            </header>
+
+            <section class="history-section">
+                <div class="table-actions">
+                    <input type="text" placeholder="Buscar en el historial..." class="search-input">
+                    <button class="btn-primary">Filtrar</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID de Ruta</th>
+                            <th>Fecha</th>
+                            <th>Vehículo</th>
+                            <th>Conductor</th>
+                            <th>Entregas</th>
+                            <th>Estado</th>
+                            <th>Incidentes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#001</td>
+                            <td>20/09/2025</td>
+                            <td>Ford Transit (ABC-123)</td>
+                            <td>Juan Pérez</td>
+                            <td>12 de 12</td>
+                            <td class="status-ok">Completada</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>#002</td>
+                            <td>21/09/2025</td>
+                            <td>Ford F-150 (DEF-456)</td>
+                            <td>María Gómez</td>
+                            <td>10 de 11</td>
+                            <td class="status-danger">Incompleta</td>
+                            <td>Sí</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

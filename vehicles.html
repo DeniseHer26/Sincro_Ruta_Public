@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sincro-Ruta - Vehículos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logisyn Logo" class="logo">
+                <h3>Sincro-Ruta</h3>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="routes.html">Rutas</a></li>
+                    <li><a href="vehicles.html" class="active">Vehículos</a></li>
+                    <li><a href="operators.html">Operadores</a></li>
+                    <li><a href="#">Historial</a></li>
+                    <li><a href="#">Configuración</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Gestión de Vehículos</h1>
+                <div class="user-info">
+                    <p>Bienvenido, <span id="user-name">Usuario</span></p>
+                </div>
+            </header>
+            
+            <section class="vehicle-list">
+                <div class="table-actions">
+                    <input type="text" placeholder="Buscar vehículo..." class="search-input">
+                    <button class="btn-primary">Agregar Nuevo Vehículo</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Modelo</th>
+                            <th>Estado</th>
+                            <th>Temperatura (°C)</th>
+                            <th>Última Actualización</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ABC-123</td>
+                            <td>Ford Transit</td>
+                            <td class="status-ok">En Ruta</td>
+                            <td>5°</td>
+                            <td>Hace 5 minutos</td>
+                        </tr>
+                        <tr>
+                            <td>XYZ-789</td>
+                            <td>Mercedes Sprinter</td>
+                            <td class="status-warning">En Mantenimiento</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

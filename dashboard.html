@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sincro-Ruta - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logisyn Logo" class="logo">
+                <h3>Sincro-Ruta</h3>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="routes.html">Rutas</a></li>
+                    <li><a href="vehicles.html">Vehículos</a></li>
+                    <li><a href="operators.html">Operadores</a></li>
+                    <li><a href="history.html">Historial</a></li>
+                    <li><a href="settings.html">Configuración</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Dashboard de Operaciones</h1>
+                <div class="user-info">
+                    <p>Bienvenido, <span id="user-name">Usuario</span></p>
+                </div>
+            </header>
+
+            <section class="metrics">
+                <div class="metric-card">
+                    <h4>Vehículos en Ruta</h4>
+                    <p class="metric-number">15/20</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Entregas Hoy</h4>
+                    <p class="metric-number">85%</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Rutas con Riesgo</h4>
+                    <p class="metric-number text-warning">3</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Incidentes Reportados</h4>
+                    <p class="metric-number text-danger">1</p>
+                </div>
+            </section>
+
+            <section class="live-map">
+                <h3>Mapa en Tiempo Real</h3>
+                <div class="map-placeholder">
+                    Mapa de rutas
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
