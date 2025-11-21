@@ -1,0 +1,128 @@
+/* Contenedor principal de 2 columnas */
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Evita scrollbars */
+}
+
+/* Columnna de la imagen*/
+.image-container {
+  flex: 1.5;
+  background-image: url('/assets/logi-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Columna del formulario */
+.form-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: relative;
+}
+
+/* La caja azul del formulario */
+.login-box {
+  background-color: var(--logipulse-dark-blue);
+  color: white;
+  padding: 2.5rem;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 1rem auto;
+  height: 70px;
+}
+
+h2, .slogan, h3 {
+  text-align: center;
+  font-family: var(--logipulse-font);
+}
+
+h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.slogan {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+/* Estilos de Formulario */
+label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  font-family: var(--logipulse-font);
+  font-size: 1rem;
+}
+
+.forgot-password {
+  display: block;
+  color: white;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.btn-login, .btn-register {
+  flex: 1;
+  padding: 1.25rem 0 !important;
+  font-family: var(--logipulse-font);
+  font-weight: 600;
+ }
+
+ .btn-login {
+  background-color: #000000;
+  color: white;
+ }
+
+ .btn-register {
+  background-color: var(--logipulse-light-blue);
+  color: #000000;
+ }
+
+/* Copyright */
+.copyrigth {
+  position: absolute;
+  bottom: 1.5rem;
+  color: #aaa;
+  font-size: 0.8rem;
+}
