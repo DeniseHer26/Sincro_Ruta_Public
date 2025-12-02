@@ -8,17 +8,17 @@
         <p class="slogan">EL PULSO DE TU LOGISTICA</p>
         <h3>Inicio de Sesion</h3>
 
-        <form aria-label="Formulario de inicio de sesión de LogiPulse">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" aria-label="Formulario de inicio de sesión de LogiPulse">
           <label for="email">Correo Electronico:</label>
-          <input id="email" type="email" placeholder="correo@electronico.com">
+          <input id="email" formControlName="correoElectronico" type="email" placeholder="correo@electronico.com">
 
           <label for="password">Contraseña:</label>
-          <input id="password" type="password" placeholder="••••••••">
+          <input id="password" type="password" formControlName="contrasena" placeholder="••••••••">
 
           <a href="#" class="forgot-password">¿Olvidaste tu Contraseña?</a>
 
           <div class="button-group">
-            <button mat-raised-button class="btn-login">Inicio de Sesion</button>
+            <button mat-raised-button class="btn-login" type="submit" [disabled]="loginForm.invalid">Inicio de Sesion</button>
             <button mat-raised-button class="btn-register">Creacion de Cuenta</button>
           </div>
         </form>
