@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, Input, signal } from '@angular/core';
+import { Component, computed, Input, signal, inject } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 export type MenuItem = {
   icon: string;
@@ -18,6 +19,8 @@ export type MenuItem = {
   styleUrl: './custom-sidenav.component.css'
 })
 export class CustomSidenavComponent {
+
+  private authService = inject(AuthService);
 
   sideNavCollapsed = signal(false);
 
@@ -48,4 +51,8 @@ export class CustomSidenavComponent {
       route: 'facturas'
     }
   ]);
+
+  logOut() {
+    this.authService.logout();
+  }
 }

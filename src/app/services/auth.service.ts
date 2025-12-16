@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   private http = inject(HttpClient);
-
+  private router = inject(Router);
   private apiUrl = 'http://localhost:3000/auth';
 
   constructor() { }
@@ -17,6 +18,14 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token_logipulse');
+    return !!sessionStorage.getItem('token_logipulse');
+  }
+
+  logout() {
+    // Borrar el token y datos del usuario
+    sessionStorage.removeItem('token_logipulse');
+    sessionStorage.removeItem('usuario_data');
+    // Redirigir al login
+    this.router.navigate(['/login']);
   }
 }

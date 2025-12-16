@@ -1,3 +1,23 @@
+:host {
+  height: 100%;
+  display: block;
+}
+
+.sidenav-flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.sidenav-top-content {
+  flex-grow: 1;
+}
+
+.sidenav-bottom-content {
+  padding-bottom: 16px;
+}
+
 .sidenav-header {
   padding-top: 24px;
   text-align: center;

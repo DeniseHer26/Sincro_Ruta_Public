@@ -1,0 +1,215 @@
+/* Contenedor principal de 2 columnas */
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Evita scrollbars */
+}
+
+/* Columnna de la imagen*/
+.image-container {
+  flex: 1.5;
+  background-image: url('/assets/login-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Columna del formulario */
+.form-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Para colocar el copyrigth abajo */
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative; /* Para posicionar el copyright */
+}
+
+/* La caja azul del formulario */
+.login-box {
+  background-color: var(--logipulse-dark-blue); /* Usa el color de style.css */
+  color: white;
+  padding: 2.5rem;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 1rem auto;
+  height: 120px;
+}
+
+h2, .slogan, h3 {
+  text-align: center;
+  font-family: var(--logipulse-font);
+}
+
+h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.slogan {
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilos de Formulario */
+label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  font-family: var(--logipulse-font);
+  font-size: 1rem;
+}
+
+/* Estilos del Mensaje de Error */
+.error-message {
+  color: #ffcccc;
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 0.2rem;
+  text-align: left;
+}
+
+/* Resaltar Campos Invalidos */
+input.ng-invalid.ng-touched {
+  border: 2px solid #ff6666;
+  background-color: #ffe0e0;
+  color: black;
+}
+
+.button-group btn-login[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: black !important;
+}
+
+.mat-mdc-raised-button[disabled], .mat-mdc-raised-button.mat-mdc-button-disabled {
+  background-color: rgb(106, 105, 105) !important;
+  color: rgb(219, 215, 215) !important;
+}
+
+.forgot-password {
+  display: block;
+  color: white;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  font-style: italic;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.btn-login, .btn-register {
+  flex: 1;
+  padding: 1.25rem 0 !important;
+  font-family: var(--logipulse-font);
+  font-weight: 600;
+  min-height: 48px;
+  margin: 0.5rem 0;
+ }
+
+ .btn-login {
+  background-color: #000000;
+  color: white;
+ }
+
+ .btn-register {
+  background-color: var(--logipulse-ligth-blue);
+  color: #000000;
+ }
+
+/* Copyright */
+.copyrigth {
+  position: absolute;
+  bottom: 1.5rem;
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+/* Moviles y Tablets */
+@media(max-width: 992px) {
+  /* Desaparece la Imagen */
+  .image-container {
+    display: none;
+  }
+
+  /* la caja de login */
+  .form-container {
+    flex: 1;
+    padding: 1.5rem;
+  }
+
+  .login-box {
+    max-width: 90%;
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  /* Adaptacion de titulos */
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+
+  /* Diseño pantallas grandes */
+  .login-container {
+    display: flex;
+    height: 100vh;
+  }
+
+  .image-container {
+    flex: 1.5;
+  }
+
+  .form-container {
+    flex: 1;
+  }
+}

@@ -1,27 +1,47 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/login/login.component'; // Tu nuevo componente
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component'; // Tu layout
+import { authGuard } from './services/auth.guard'; // Tu guardia de autenticación
 
 export const routes: Routes = [
+  // 1. Ruta Pública (Login)
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'LogiPulse | Iniciar Sesión'
+  },
+
+  // 2. Rutas Privadas (Con Layout de Menu y Toolbar)
   {
     path: '',
-    component: AppComponent,
-    title: 'LogiPulse | Iniciar Sesion'
+    component: MainLayoutComponent, // Este componente tiene el <router-outlet> interno
+    canActivate: [authGuard], // Protegemos todo el bloque
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
+        title: 'LogiPulse | Dashboard'
+      },
+      {
+        path: 'empresa',
+        loadComponent: () => import('./pages/empresa/empresa.component').then(m => m.EmpresaComponent),
+        title: 'LogiPulse | Empresa'
+      },
+      {
+        path: 'servicios',
+        loadComponent: () => import('./pages/servicios/servicios.component').then(m => m.ServiciosComponent),
+        title: 'LogiPulse | Servicios'
+      },
+      {
+        path: 'facturas',
+        loadComponent: () => import('./pages/facturas/facturas.component').then(m => m.FacturasComponent),
+        title: 'LogiPulse | Facturas'
+      },
+      // Redirección por defecto si entran a la raíz y están logueados
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
   },
-    {
-    path: 'dashboard',
-    loadComponent: () => import('../app/pages/dashboard/dashboard.component').then(m => m.DashboardComponent)
-  },
-  {
-    path: 'empresa',
-    loadComponent: () => import('../app/pages/empresa/empresa.component').then(m => m.EmpresaComponent)
-  },
-  {
-    path: 'servicios',
-    loadComponent: () => import('../app/pages/servicios/servicios.component').then(m => m.ServiciosComponent)
-  },
-  {
-    path: 'facturas',
-    loadComponent: () => import('../app/pages/facturas/facturas.component').then(m => m.FacturasComponent)
 
-  }
+  // Redirección si la ruta no existe
+  { path: '**', redirectTo: 'login' }
 ];
