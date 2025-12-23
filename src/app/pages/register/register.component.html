@@ -1,1 +1,115 @@
-<p>register works!</p>
+<div class="register-container">
+  <div class="register-box">
+    <div class="logo-wrapper">
+      <img src="assets/Logisyn.png" alt="LogiPulse Logo">
+    </div>
+
+    <h2>LogiPulse</h2>
+    <p class="slogan">EL PULSO DE TU LOGISTICA</p>
+    <h3>Cree su Cuenta</h3>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" aria-label="Formulario de registro de informacion de LogiPulse">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="nombre">Nombre Empresa:</label>
+          <input id="nombre" formControlName="nombreEmpresa" type="text" placeholder="Nombre de tu Empresa">
+          <ng-container *ngIf="registerForm.get('nombreEmpresa')?.invalid && (registerForm.get('nombreEmpresa')?.dirty || registerForm.get('nombreEmpresa')?.touched)">
+            <p class="error-message" *ngIf="registerForm.get('nombreEmpresa')?.errors?.['required']">
+              El nombre de la empresa es <b>obligatorio</b>.
+            </p>
+          </ng-container>
+        </div>
+
+        <div class="form-field">
+          <label for="razon">Razon Social:</label>
+          <input id="razon" formControlName="razonSocial" type="text" placeholder="Razon Social de tu Empresa">
+          <ng-container *ngIf="registerForm.get('razonSocial')?.invalid && (registerForm.get('razonSocial')?.dirty || registerForm.get('razonSocial')?.touched)" aria-live="polite">
+            <p class="error-message" *ngIf="registerForm.get('razonSocial')?.errors?.['required']">
+              La razon social es <b>obligatoria</b>.
+            </p>
+          </ng-container>
+        </div>
+
+        <div class="form-field">
+          <label for="rfc">RFC:</label>
+          <input id="rfc" formControlName="rfc" type="text" placeholder="ABCD123456FG">
+          <ng-container *ngIf="registerForm.get('rfc')?.invalid && (registerForm.get('rfc')?.dirty || registerForm.get('rfc')?.touched)" aria-live="polite">
+            <p class="error-message" *ngIf="registerForm.get('rfc')?.errors?.['required']">
+              El rfc es <b>obligatorio</b>.
+            </p>
+            <p class="error-message" *ngIf="registerForm.get('rfc')?.errors?.['pattern']">
+              El rfc no tiene un <b>formato valido</b>.
+            </p>
+          </ng-container>
+        </div>
+
+        <div class="form-field">
+          <label for="email">Correo Electronico:</label>
+          <input id="email" formControlName="correoElectronico" type="email" placeholder="correoElectronio@empresa.com">
+          <ng-container *ngIf="registerForm.get('correoElectronico')?.invalid && (registerForm.get('correoElectronico')?.dirty || registerForm.get('correoElectronico')?.touched)" aria-live="polite">
+            <p class="error-message" *ngIf="registerForm.get('correoElectronico')?.errors?.['required']">
+              El correo electrónico es <b>obligatorio</b>.
+            </p>
+            <p class="error-message" *ngIf="registerForm.get('correoElectronico')?.errors?.['email']">
+              El formato de correo no es <b>válido</b>.
+            </p>
+          </ng-container>
+        </div>
+
+        <div class="form-field">
+          <label for="pass">Contraseña:</label>
+          <div class="input-wrapper">
+            <mat-icon class="icon-toggle" (click)="togglePassword()">
+              {{ hidePassword() ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+            <input id="pass" formControlName="contrasena" [type]="hidePassword() ? 'password': 'text'" placeholder="Debe tener entre ocho y treinta caracteres" class="input-with-icon">
+          </div>
+          <ng-container *ngIf="registerForm.get('contrasena')?.invalid && (registerForm.get('contrasena')?.dirty || registerForm.get('contrasena')?.touched)" aria-live="polite">
+            <p class="error-message" *ngIf="registerForm.get('contrasena')?.errors?.['required']">
+              La contraseña es <b>obligatoria</b>.
+            </p>
+            <p class="error-message" *ngIf="registerForm.get('contrasena')?.errors?.['pattern']">
+              La contraseña debe tener <b>entre 8 y 30 caracteres, una letra mayuscula, un numero y un caracter especial</b>.
+            </p>
+          </ng-container>
+        </div>
+
+        <div class="form-field">
+          <label for="confirm">Repita su Contraseña:</label>
+          <div class="input-wrapper">
+            <mat-icon class="icon-toggle" (click)="toggleConfirmPassword()">
+              {{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+            <input id="confirm" formControlName="confirmarContrasena" [type]="hideConfirmPassword() ? 'password' : 'text'" placeholder="Repita su contraseña" class="input-with-icon">
+          </div>
+          <ng-container *ngIf="(registerForm.get('confirmarContrasena')?.invalid || registerForm.hasError('mismatch')) && (registerForm.get('confirmarContrasena')?.dirty || registerForm.get('confirmarContrasena')?.touched)" aria-live="polite">
+            <p class="error-message" *ngIf="registerForm.get('confirmarContrasena')?.errors?.['required']">
+              La confirmacion de la contraseña es <b>obligatoria</b>.
+            </p>
+            <p class="error-message" *ngIf="registerForm.get('confirmarContrasena')?.errors?.['pattern']">
+              La contraseña debe tener <b>entre 8 y 30 caracteres, una letra mayuscula, un numero y un caracter especial</b>.
+            </p>
+            '<p class="error-message" *ngIf="registerForm.hasError('mismatch')">
+              Las contraseñas no <b>coinciden</b>.
+            </p>'
+          </ng-container>
+        </div>
+
+        <div class="button-group">
+          <button mat-raised-button type="button" class="btn-back" routerLink="/login">
+            Retroceder
+          </button>
+          <button mat-raised-button type="submit" class="btn-sign-in" [disabled]="registerForm.invalid">
+            Crea tu Cuenta
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <span class="copyright">LOGISYN® 2025</span>
+</div>
+
+@if(loaderService.isLoading()) {
+  <app-loader></app-loader>
+}

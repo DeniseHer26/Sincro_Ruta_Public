@@ -11,3 +11,7 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+@if (LoaderService.isLoading()) {
+  <app-loader></app-loader>
+}

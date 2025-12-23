@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, Validators, FormBuilder, } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
@@ -7,7 +7,10 @@ import { AuthService } from '../../services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
+import { LoaderService } from '../../core/loader.service';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +20,10 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    LoaderComponent,
+    RouterLink
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -27,10 +32,18 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  loaderService = inject(LoaderService);
+
+  hidePassword = signal(true);
+
   loginForm: FormGroup = this.fb.group({
     correoElectronico: ['', [Validators.required, Validators.email]],
-    contrasena: ['', [Validators.required, Validators.minLength(6)]]
+    contrasena: ['', [Validators.required, Validators.minLength(8)]]
   });
+
+  togglePassword() {
+    this.hidePassword.update(prev => !prev);
+  }
 
   onSubmit() {
     if(this.loginForm.valid) {

@@ -1,8 +1,10 @@
 <div class="login-container">
-  <div class="image-container" role="presentation" aria-hidden="true"></div>
+  <div class="image-container" aria-hidden="true"></div>
     <div class="form-container">
-      <div class="login-box" role="main">
-        <img src="/assets/Logisyn.png" alt="LogiPulse Logo" class="logo">
+      <div class="login-box">
+        <div class="logo-wrapper">
+          <img src="/assets/Logisyn.png" alt="LogiPulse Logo">
+        </div>
 
         <h2>LogiPulse</h2>
         <p class="slogan">EL PULSO DE TU LOGISTICA</p>
@@ -21,13 +23,18 @@
           </ng-container>
 
           <label for="password">Contraseña:</label>
-          <input id="password" type="password" formControlName="contrasena" placeholder="••••••••">
+          <div class="input-wrapper">
+            <mat-icon class="icon-toggle" (click)="togglePassword()">
+              {{ hidePassword() ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+            <input id="password" formControlName="contrasena" [type]="hidePassword() ? 'password' : 'text'" placeholder="••••••••">
+          </div>
           <ng-container *ngIf="loginForm.get('contrasena')?.invalid && (loginForm.get('contrasena')?.dirty || loginForm.get('contrasena')?.touched)">
             <p class="error-message" *ngIf="loginForm.get('contrasena')?.errors?.['required']">
               La contraseña es <b>obligatoria</b>.
             </p>
             <p class="error-message" *ngIf="loginForm.get('contrasena')?.errors?.['minlength']">
-              La contraseña debe tener al menos <b>6 caracteres</b>.
+              La contraseña debe tener al menos <b>8 caracteres</b>.
             </p>
           </ng-container>
 
@@ -35,11 +42,15 @@
 
           <div class="button-group">
             <button mat-raised-button class="btn-login" type="submit" [disabled]="loginForm.invalid">Inicio de Sesion</button>
-            <button mat-raised-button class="btn-register">Creacion de Cuenta</button>
+            <button mat-raised-button class="btn-register" type="button" routerLink="/register">Creacion de Cuenta</button>
           </div>
         </form>
       </div>
 
-      <span class="copyright" aria-hidden="true">LOGISYN® 2025</span>
+      <span class="copyright">LOGISYN® 2025</span>
   </div>
 </div>
+
+@if(loaderService.isLoading()) {
+  <app-loader></app-loader>
+}

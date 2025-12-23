@@ -37,10 +37,22 @@
   box-sizing: border-box;
 }
 
-.logo {
+.logo-wrapper {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  overflow: hidden;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-wrapper img {
+  width: 80px;
+  height: 80px;
   display: block;
-  margin: 0 auto 1rem auto;
-  height: 120px;
 }
 
 h2, .slogan, h3 {
@@ -79,13 +91,45 @@ label {
 input[type="email"],
 input[type="password"] {
   width: 100%;
-  padding: 0.8rem;
+  padding: 12px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 1rem;
   box-sizing: border-box;
   font-family: var(--logipulse-font);
   font-size: 1rem;
+}
+
+/* Contenedor del Input con Icono */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo del Icono */
+.icon-toggle {
+  position: absolute;
+  left: 10px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+  z-index: 2;
+  font-size: 20px;
+}
+
+.input-with-icon {
+  width: 100%;
+  padding: 12px 12px 12px 40px !important;
+  border-radius: 10px;
+  border: none;
+  font-family: var(--logipulse-font);
+  box-sizing: border-box;
+}
+
+/* Efecto al pasar el mouse por el icono */
+.icon-toggle:hover {
+  color: var(--logipulse-dark-blue);
 }
 
 /* Estilos del Mensaje de Error */
@@ -105,17 +149,6 @@ input.ng-invalid.ng-touched {
   color: black;
 }
 
-.button-group btn-login[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background-color: black !important;
-}
-
-.mat-mdc-raised-button[disabled], .mat-mdc-raised-button.mat-mdc-button-disabled {
-  background-color: rgb(106, 105, 105) !important;
-  color: rgb(219, 215, 215) !important;
-}
-
 .forgot-password {
   display: block;
   color: white;
@@ -127,6 +160,7 @@ input.ng-invalid.ng-touched {
   font-style: italic;
 }
 
+/* Botones */
 .button-group {
   display: flex;
   justify-content: space-between;
@@ -142,22 +176,34 @@ input.ng-invalid.ng-touched {
   margin: 0.5rem 0;
  }
 
- .btn-login {
+/* Boton de registro de usuario */
+ .btn-register {
   background-color: #000000;
   color: white;
  }
 
- .btn-register {
+  /* Boton de login */
+ .btn-login {
   background-color: var(--logipulse-ligth-blue);
-  color: #000000;
+  color: white;
  }
 
+ .button-group .btn-login[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: black !important;
+}
+
+.mat-mdc-raised-button[disabled], .mat-mdc-raised-button.mat-mdc-button-disabled {
+  background-color: rgb(106, 105, 105) !important;
+  color: rgb(219, 215, 215) !important;
+}
+
 /* Copyright */
-.copyrigth {
-  position: absolute;
-  bottom: 1.5rem;
-  color: #aaa;
-  font-size: 0.8rem;
+.copyright {
+  margin-top: 30px;
+  color: #666;
+  font-size: 0.75rem;
 }
 
 /* Moviles y Tablets */

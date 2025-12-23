@@ -1,14 +1,23 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component'; // Tu nuevo componente
-import { MainLayoutComponent } from './layout/main-layout/main-layout.component'; // Tu layout
-import { authGuard } from './services/auth.guard'; // Tu guardia de autenticación
+import { LoginComponent } from './pages/login/login.component'; // Componente Login
+import { RegisterComponent } from './pages/register/register.component'; // Componete Register
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component'; // Mainlayout
+import { authGuard } from './services/auth.guard'; // Guardia de autenticación
+import { animation } from '@angular/animations';
 
 export const routes: Routes = [
   // 1. Ruta Pública (Login)
   {
     path: 'login',
     component: LoginComponent,
-    title: 'LogiPulse | Iniciar Sesión'
+    title: 'LogiPulse | Iniciar Sesión',
+    data: { animation: 'LoginPage' }
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    title: 'LogiPulse | Registrate',
+    data: { animation: 'RegisterPage' }
   },
 
   // 2. Rutas Privadas (Con Layout de Menu y Toolbar)
