@@ -1,9 +1,35 @@
 /* Contenedor principal de 2 columnas */
 .login-container {
   display: flex;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden; /* Evita scrollbars */
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow-y: auto;
+  font-family: var(--logipulse-font);
+}
+
+/* Columna del formulario */
+.form-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Para colocar el copyrigth abajo */
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  padding: 250px 20px 40px 20px;
+  box-sizing: border-box;
+}
+
+/* La caja azul del formulario */
+.login-box {
+  background-color: var(--logipulse-dark-blue); /* Usa el color de style.css */
+  color: white;
+  border-radius: 25px;
+  padding: 70px 30px 40px 30px;
+  width: 100%;
+  max-width: 450px; /* Ancho máximo para Desktop */
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
 /* Columnna de la imagen*/
@@ -14,37 +40,15 @@
   background-position: center;
 }
 
-/* Columna del formulario */
-.form-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column; /* Para colocar el copyrigth abajo */
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  position: relative; /* Para posicionar el copyright */
-}
-
-/* La caja azul del formulario */
-.login-box {
-  background-color: var(--logipulse-dark-blue); /* Usa el color de style.css */
-  color: white;
-  padding: 2.5rem;
-  border-radius: 25px;
-  width: 100%;
-  max-width: 450px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-}
-
+/* Logo de la empresa */
 .logo-wrapper {
   position: absolute;
-  top: 95px;
+  top: -55px;
   left: 50%;
-  overflow: hidden;
+  overflow: hidden; /* Esconde las partes de la imagen que se extienden del circulo */
   transform: translateX(-50%);
   background: white;
-  border-radius: 50%;
+  border-radius: 50%; /* Círculo */
   padding: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -55,7 +59,9 @@
   display: block;
 }
 
-h2, .slogan, h3 {
+/* Fuentes */
+h2, h3, .slogan {
+  margin-top: 0;
   text-align: center;
   font-family: var(--logipulse-font);
 }
@@ -76,8 +82,8 @@ h2 {
 
 h3 {
   font-size: 1.5rem;
-  font-weight: 600;
   margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 /* Estilos de Formulario */
@@ -85,19 +91,17 @@ label {
   display: block;
   font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
 
-input[type="email"],
-input[type="password"] {
+input {
   width: 100%;
   padding: 12px;
-  border: none;
   border-radius: 10px;
-  margin-bottom: 1rem;
-  box-sizing: border-box;
+  margin-top: 0.1rem;
+  border: none;
   font-family: var(--logipulse-font);
-  font-size: 1rem;
+  box-sizing: border-box;
 }
 
 /* Contenedor del Input con Icono */
@@ -110,14 +114,15 @@ input[type="password"] {
 /* Estilo del Icono */
 .icon-toggle {
   position: absolute;
-  left: 10px;
+  left: 12px;
   color: #666;
   cursor: pointer;
-  user-select: none;
-  z-index: 2;
+  display: flex;
+  align-items: center;
+  z-index: 5;
   font-size: 20px;
 }
-
+/* Ajuste del Input para no tapar el Icono */
 .input-with-icon {
   width: 100%;
   padding: 12px 12px 12px 40px !important;
@@ -125,6 +130,7 @@ input[type="password"] {
   border: none;
   font-family: var(--logipulse-font);
   box-sizing: border-box;
+  font-size: 1rem;
 }
 
 /* Efecto al pasar el mouse por el icono */
@@ -136,8 +142,8 @@ input[type="password"] {
 .error-message {
   color: #ffcccc;
   font-size: 0.8rem;
-  margin-top: -0.5rem;
-  margin-bottom: 1rem;
+  font-family: var(--logipulse-font);
+  margin-top: 0.5rem;
   padding-left: 0.2rem;
   text-align: left;
 }
@@ -149,13 +155,14 @@ input.ng-invalid.ng-touched {
   color: black;
 }
 
+/* Link de Pagina de Contraseña Olvidada */
 .forgot-password {
   display: block;
   color: white;
   text-decoration: underline;
   font-size: 0.9rem;
-  margin-top: 0.5rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
   text-align: left;
   font-style: italic;
 }
@@ -163,8 +170,8 @@ input.ng-invalid.ng-touched {
 /* Botones */
 .button-group {
   display: flex;
-  justify-content: space-between;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 .btn-login, .btn-register {
@@ -184,7 +191,7 @@ input.ng-invalid.ng-touched {
 
   /* Boton de login */
  .btn-login {
-  background-color: var(--logipulse-ligth-blue);
+  background-color: var(--logipulse-light-blue);
   color: white;
  }
 
@@ -201,7 +208,8 @@ input.ng-invalid.ng-touched {
 
 /* Copyright */
 .copyright {
-  margin-top: 30px;
+  margin-top: auto;
+  padding: 1rem 0;
   color: #666;
   font-size: 0.75rem;
 }
@@ -215,14 +223,13 @@ input.ng-invalid.ng-touched {
 
   /* la caja de login */
   .form-container {
-    flex: 1;
-    padding: 1.5rem;
+    padding-top: 80px;
   }
 
   .login-box {
     max-width: 90%;
     width: 100%;
-    padding: 1.5rem;
+    padding: 70px 1.5rem 1.5rem;
   }
 
   /* Adaptacion de titulos */

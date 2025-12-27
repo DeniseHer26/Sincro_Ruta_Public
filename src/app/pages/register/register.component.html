@@ -11,7 +11,7 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" aria-label="Formulario de registro de informacion de LogiPulse">
       <div class="form-grid">
         <div class="form-field">
-          <label for="nombre">Nombre Empresa:</label>
+          <label for="nombre">Nombre de su Empresa:</label>
           <input id="nombre" formControlName="nombreEmpresa" type="text" placeholder="Nombre de tu Empresa">
           <ng-container *ngIf="registerForm.get('nombreEmpresa')?.invalid && (registerForm.get('nombreEmpresa')?.dirty || registerForm.get('nombreEmpresa')?.touched)">
             <p class="error-message" *ngIf="registerForm.get('nombreEmpresa')?.errors?.['required']">
@@ -89,9 +89,9 @@
             <p class="error-message" *ngIf="registerForm.get('confirmarContrasena')?.errors?.['pattern']">
               La contraseña debe tener <b>entre 8 y 30 caracteres, una letra mayuscula, un numero y un caracter especial</b>.
             </p>
-            '<p class="error-message" *ngIf="registerForm.hasError('mismatch')">
+            <p class="error-message" *ngIf="registerForm.hasError('mismatch')">
               Las contraseñas no <b>coinciden</b>.
-            </p>'
+            </p>
           </ng-container>
         </div>
 

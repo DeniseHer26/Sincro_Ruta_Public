@@ -11,6 +11,7 @@
         <h3>Inicio de Sesion</h3>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" aria-label="Formulario de inicio de sesión de LogiPulse">
+
           <label for="email">Correo Electronico:</label>
           <input id="email" formControlName="correoElectronico" type="email" placeholder="correo@electronico.com">
           <ng-container *ngIf="loginForm.get('correoElectronico')?.invalid && (loginForm.get('correoElectronico')?.dirty || loginForm.get('correoElectronico')?.touched)">
@@ -27,14 +28,11 @@
             <mat-icon class="icon-toggle" (click)="togglePassword()">
               {{ hidePassword() ? 'visibility_off' : 'visibility' }}
             </mat-icon>
-            <input id="password" formControlName="contrasena" [type]="hidePassword() ? 'password' : 'text'" placeholder="••••••••">
+            <input id="password" formControlName="contrasena" class="input-with-icon" [type]="hidePassword() ? 'password' : 'text'" placeholder="••••••••">
           </div>
           <ng-container *ngIf="loginForm.get('contrasena')?.invalid && (loginForm.get('contrasena')?.dirty || loginForm.get('contrasena')?.touched)">
             <p class="error-message" *ngIf="loginForm.get('contrasena')?.errors?.['required']">
               La contraseña es <b>obligatoria</b>.
-            </p>
-            <p class="error-message" *ngIf="loginForm.get('contrasena')?.errors?.['minlength']">
-              La contraseña debe tener al menos <b>8 caracteres</b>.
             </p>
           </ng-container>
 

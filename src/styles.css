@@ -14,3 +14,21 @@ body {
   padding: 0;
   background-color: #ffffff;
 }
+
+/* Snackbar de Exito */
+.sucess-snackbar {
+  --mdc-snackbar-container-color: #2e7d32;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+/* Snackbar de Error */
+.error-snackbar {
+  --mdc-snackbar-container-color: #d32f2f;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+/* Snackbar de Informacion */
+.info-snackbar {
+  --mdc-snackbar-container-color: var(--logipulse-dark-blue);
+  --mdc-snackbar-supporting-text-color: white;
+}
