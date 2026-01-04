@@ -1,0 +1,48 @@
+:host {
+  height: 100%;
+  display: block;
+}
+
+.sidenav-flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.sidenav-top-content {
+  flex-grow: 1;
+}
+
+.sidenav-bottom-content {
+  padding-bottom: 16px;
+}
+
+.sidenav-header {
+  padding-top: 24px;
+  text-align: center;
+
+  > img {
+    border-radius: 100%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .header-text {
+    > h2 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    > p {
+      margin: 0;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.hide-header-text {
+  opacity: 0;
+  height: 0px;
+}
