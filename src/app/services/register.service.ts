@@ -7,7 +7,7 @@ import { Observable, delay } from 'rxjs';
 })
 export class RegisterService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3000/empresas';
 
   constructor() { }
 
