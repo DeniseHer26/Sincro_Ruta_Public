@@ -1,9 +1,61 @@
-<div class="parent">
-    <div class="div1">1</div>
-    <div class="div2">2</div>
-    <div class="div3">3</div>
-    <div class="div4">4</div>
-    <div class="div5">5</div>
-    <div class="div6">6</div>
-    <div class="div7">7</div>
+<div class="dashboard-grid">
+
+  <div class="header-welcome div1">
+    <h1>{{ saludo() }}</h1>
+    <h2 class="company-name">{{ empresaData()?.nombreEmpresa || 'Cargando...' }}</h2>
+    <span class="role-tag">Administrador LogiPulse</span>
+  </div>
+
+  <div class="search-container div7">
+    <div class="search-box">
+      <input type="text" placeholder="Buscar servicios, facturas...">
+      <mat-icon>search</mat-icon>
+    </div>
+  </div>
+
+  <div class="kpi-card div4">
+    <div class="kpi-icon blue"><mat-icon>domain</mat-icon></div>
+    <div class="kpi-content">
+      <p>Total de Servicios</p>
+      <h3>600</h3>
+    </div>
+  </div>
+
+  <div class="kpi-card div5">
+    <div class="kpi-icon dark-blue"><mat-icon>description</mat-icon></div>
+    <div class="kpi-content">
+      <p>Cotizaciones</p>
+      <h3>75</h3>
+    </div>
+  </div>
+
+  <div class="kpi-card div6">
+    <div class="kpi-icon blue-gradient"><mat-icon>insert_chart</mat-icon></div>
+    <div class="kpi-content">
+      <p>Ingresos</p>
+      <h3>55,000.00</h3>
+    </div>
+  </div>
+
+  <div class="chart-container div9">
+    <div class="placeholder-chart">
+       <p>Visualización de Servicios Mensuales</p>
+       <div class="bar-mockup"></div>
+    </div>
+  </div>
+
+  <div class="side-list div8">
+    <div class="list-item" *ngFor="let i of [1,2,3]">
+      <div class="item-header">
+        <mat-icon class="icon-file">assignment</mat-icon>
+        <span class="date">15/07/2025</span>
+      </div>
+      <div class="item-details">
+        <p><strong>TOL - MZ</strong> <span>Cotizado: $20,000</span></p>
+        <p>Tipo: Camión 3 Ton | Servicio: Consolidado</p>
+      </div>
+    </div>
+  </div>
+
 </div>
+

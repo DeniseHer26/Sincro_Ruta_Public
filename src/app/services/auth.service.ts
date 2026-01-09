@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { delay, Observable } from 'rxjs';
+import { delay, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,10 @@ export class AuthService {
     sessionStorage.removeItem('usuario_data');
     // Redirigir al login
     this.router.navigate(['/login']);
+  }
+
+  getProfile() {
+    // El Interceptor se encargará de inyectar el token automáticamente
+    return this.http.get('http://localhost:3000/empresas/perfil');
   }
 }

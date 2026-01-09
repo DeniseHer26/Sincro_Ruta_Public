@@ -5,16 +5,16 @@ import {
 } from "./chunk-ELIVUOAN.js";
 import "./chunk-ZBNK6H7F.js";
 import {
+  MatButton,
+  MatButtonModule
+} from "./chunk-HDXYZMRG.js";
+import {
   animate,
   state,
   style,
   transition,
   trigger
 } from "./chunk-FMNPNRSK.js";
-import {
-  MatButton,
-  MatButtonModule
-} from "./chunk-HDXYZMRG.js";
 import {
   BidiModule,
   BreakpointObserver,
