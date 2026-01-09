@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, Input, signal, inject } from '@angular/core';
+import { Component, computed, Input, signal, inject, OnInit } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { EmpresaService } from '../../pages/empresa/empresa.service';
 
 export type MenuItem = {
   icon: string;
@@ -18,9 +19,11 @@ export type MenuItem = {
   templateUrl: './custom-sidenav.component.html',
   styleUrl: './custom-sidenav.component.css'
 })
-export class CustomSidenavComponent {
-
+export class CustomSidenavComponent implements OnInit {
+  private empresaService = inject(EmpresaService);
   private authService = inject(AuthService);
+
+  empresaData = signal<any>(null);
 
   sideNavCollapsed = signal(false);
 
@@ -29,6 +32,17 @@ export class CustomSidenavComponent {
   }
 
   profilePicSize = computed(() => this.sideNavCollapsed() ? '32' : '100')
+
+  ngOnInit(){
+    this.obtenerPerfil();
+  }
+
+  obtenerPerfil() {
+    this.empresaService.getPerfil().subscribe({
+      next: (data) => this.empresaData.set(data),
+      error: (err) => console.error('Error al obtener perfil', err)
+    });
+  }
 
   menuItems = signal<MenuItem[]>([
     {

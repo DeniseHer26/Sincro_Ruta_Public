@@ -1,1 +1,56 @@
-<h1>Empresa</h1>>
+<div class="perfil-container">
+  <div class="perfil-box">
+
+    <form [formGroup]="perfilForm">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Nombre Empresa:</label>
+          <input formControlName="nombreEmpresa" type="text">
+        </div>
+
+        <div class="form-field">
+          <label>Razón Social:</label>
+          <input formControlName="razonSocial" type="text">
+        </div>
+
+        <div class="form-field">
+          <label>RFC:</label>
+          <input formControlName="rfc" type="text">
+        </div>
+
+        <div class="form-field">
+          <label>Giro Empresarial:</label>
+          <input formControlName="giroEmpresarial" type="text">
+        </div>
+
+        <div class="form-field">
+          <label>Correo Electrónico:</label>
+          <input formControlName="correoElectronico" type="email">
+        </div>
+
+        <div class="form-field">
+          <label>Número Telefónico:</label>
+          <input formControlName="numeroTelefonico" type="text">
+        </div>
+
+        <div class="form-field full-width">
+          <label>Representante Legal:</label>
+          <input formControlName="representanteLegal" type="text">
+        </div>
+
+        <div class="form-field full-width">
+          <label>Dirección:</label>
+          <textarea formControlName="direccion" rows="2" type="text"></textarea>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button mat-raised-button type="button" class="btn-back" routerLink="/dashboard">
+          Regresar al Dashboard
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <span class="copyright">LOGISYN® 2025</span>
+</div>
