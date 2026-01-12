@@ -1,56 +1,112 @@
-<div class="perfil-container">
-  <div class="perfil-box">
+<div class="modulo-container">
 
-    <form [formGroup]="perfilForm">
-      <div class="form-grid">
-        <div class="form-field">
-          <label>Nombre Empresa:</label>
-          <input formControlName="nombreEmpresa" type="text">
-        </div>
+  <main class="content-wrapper">
+    <mat-tab-group dynamicHeight class="custom-tabs">
 
-        <div class="form-field">
-          <label>Razón Social:</label>
-          <input formControlName="razonSocial" type="text">
-        </div>
-
-        <div class="form-field">
-          <label>RFC:</label>
-          <input formControlName="rfc" type="text">
-        </div>
-
-        <div class="form-field">
-          <label>Giro Empresarial:</label>
-          <input formControlName="giroEmpresarial" type="text">
-        </div>
-
-        <div class="form-field">
-          <label>Correo Electrónico:</label>
-          <input formControlName="correoElectronico" type="email">
-        </div>
-
-        <div class="form-field">
-          <label>Número Telefónico:</label>
-          <input formControlName="numeroTelefonico" type="text">
-        </div>
-
-        <div class="form-field full-width">
-          <label>Representante Legal:</label>
-          <input formControlName="representanteLegal" type="text">
-        </div>
-
-        <div class="form-field full-width">
-          <label>Dirección:</label>
-          <textarea formControlName="direccion" rows="2" type="text"></textarea>
-        </div>
-      </div>
-
-      <div class="button-group">
-        <button mat-raised-button type="button" class="btn-back" routerLink="/dashboard">
-          Regresar al Dashboard
+      <mat-tab label="Informacion">
+        <form [formGroup]="infoForm" class="tab-content">
+          <div class="form-grid">
+            <div class="field">
+              <label>Nombre Empresa:</label>
+              <input formControlName="nombreEmpresa">
+            </div>
+            <div class="field">
+              <label>Razon Social:</label>
+              <input formControlName="razonSocial">
+            </div>
+            <div class="field">
+              <label>RFC:</label>
+              <input formControlName="rfc">
+            </div>
+            <div class="field">
+              <label>Giro Empresarial:</label>
+              <input formControlName="giroEmpresarial">
+            </div>
+            <div class="field full-width">
+              <label>Direccion:</label>
+              <input formControlName="direccion">
+            </div>
+            <div class="field">
+              <label>Representante Legal:</label>
+              <input formControlName="representanteLegal">
+            </div>
+            <div class="field">
+              <label>CURP:</label>
+              <input formControlName="curp">
+            </div>
+            <div class="field">
+              <label>Correo Empresarial:</label>
+              <input formControlName="correoElectronico">
+            </div>
+            <div class="field">
+              <label>Numero Telefonico Empresarial:</label>
+              <input formControlName="numeroTelefonico">
+            </div>
+          </div>
+          <div class="actions">
+      @if (isEditing()) {
+        <button mat-flat-button class="btn-cancel" type="button" (click)="cancelarEdicion()">
+          Cancelar
         </button>
-      </div>
-    </form>
-  </div>
+      }
 
-  <span class="copyright">LOGISYN® 2025</span>
+      <button mat-flat-button class="btn-update" type="button" (click)="toggleEdit()">
+        {{ isEditing() ? 'Guardar Cambios' : 'Actualizar Informacion' }}
+      </button>
+    </div>
+        </form>
+      </mat-tab>
+
+      <mat-tab label="Logo">
+  <div class="tab-content logo-section">
+    <div class="logo-info">
+      <p class="description">
+        Actualice el logo de su empresa para agilizar y personalizar la generación de
+        documentacion (facturas, ordenes, etc.) de su empresa en nuestra plataforma.
+      </p>
+
+      <div class="upload-zone">
+        <label>Actualice su logo:</label>
+
+        <div class="custom-file-input" [class.disabled]="!isEditingLogo()">
+          <input
+            type="file"
+            id="logo-input"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            [disabled]="!isEditingLogo()">
+
+          <div class="gray-bar">
+            {{ fileName() || (isEditingLogo() ? 'Seleccione una imagen...' : '') }}
+          </div>
+        </div>
+
+        <div class="actions-logo">
+          @if (isEditingLogo()) {
+            <button mat-flat-button class="btn-cancel" (click)="cancelarEdicionLogo()">
+              Cancelar
+            </button>
+          }
+
+          <button mat-flat-button class="btn-update" (click)="toggleEditLogo()">
+            {{ isEditingLogo() ? 'Subir Logo' : 'Actualizar Logo' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-preview-large">
+      <img [src]="getSafeLogoUrl(imagePreview())" alt="Logo de la empresa">
+    </div>
+  </div>
+</mat-tab>
+
+      <mat-tab label="Contraseña">
+        <div class="tab-content">
+          <p>Configuración de seguridad para la cuenta de la empresa.</p>
+          </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </main>
 </div>

@@ -3,7 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { EmpresaService } from '../empresa/empresa.service';
+import { EmpresaService } from '../../core/services/empresa.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -105,7 +105,7 @@ export class RegisterComponent {
             console.error('Error al registrar:', err);
             this.loaderService.hide();
             const msg = err?.error?.message || 'Error al procesar registro. Intenta nuevamente.';
-            this.notificationService.shownError(msg)
+            this.notificationService.showError(msg)
           }
         });
     } else {

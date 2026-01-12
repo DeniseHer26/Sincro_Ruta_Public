@@ -65,7 +65,7 @@ export class LoginComponent {
           console.error('Error de Login', err);
           this.loaderService.hide();
           const msg = err?.error?.message || 'Error al iniciar sesion. Intente nuevamente.';
-          this.notificationService.shownError(msg);
+          this.notificationService.showError(msg);
         }
       })
     } else {

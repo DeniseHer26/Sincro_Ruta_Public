@@ -21,7 +21,7 @@ export class NotificacionService {
     });
   }
 
-  shownError(message: string): void {
+  showError(message: string): void {
     this.snackBar.open(message, 'Cerrar', {
       ...this.defaultConfig,
       panelClass:['error-snackbar']
