@@ -2,10 +2,12 @@
   <div class="sidenav-top-content">
     <div class="sidenav-header">
       <img
-        [width]="profilePicSize()"
-        [height]="profilePicSize()"
-        src="/assets/Logisyn.png"
-      />
+    [width]="profilePicSize()"
+    [height]="profilePicSize()"
+    [src]="logoUrl()"
+    alt="Logo Empresa"
+    class="sidebar-logo"
+  />
       <div class="header-text" [class.hide-header-text]="sideNavCollapsed()">
         <h2>{{ empresaData()?.nombreEmpresa || 'Cargando...' }}</h2>
         <p>Tu rol</p>

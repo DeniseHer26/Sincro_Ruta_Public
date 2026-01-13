@@ -17,6 +17,7 @@ import { LoaderService } from '../../core/loader.service';
   styleUrl: './empresa.component.css'
 })
 export class EmpresaComponent implements OnInit{
+  public static readonly PASSWORD_PATTERN = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$/;
   private empresaService = inject(EmpresaService);
   private fb = inject(FormBuilder);
   private notify = inject(NotificacionService);
@@ -25,12 +26,16 @@ export class EmpresaComponent implements OnInit{
   infoForm!: FormGroup;
   empresaData = signal<Empresa | null>(null);
 
+  isEditing = signal<boolean>(false);
+
   isEditingLogo = signal<boolean>(false);
   selectedFile = signal<File | null>(null);
   imagePreview = signal<string>('');
   fileName = signal<string>('');
 
-  isEditing = signal<boolean>(false);
+  passwordForm!: FormGroup;
+
+  isEditingPassword = signal<boolean>(false);
 
   ngOnInit() {
     this.initForms();
@@ -49,6 +54,20 @@ export class EmpresaComponent implements OnInit{
       correoElectronico: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
       numeroTelefonico: [{ value: '', disabled: true }]
     });
+    this.passwordForm = this.fb.group({
+      nuevaContrasena: [{ value: '', disabled: true }, [
+        Validators.required,
+        Validators.pattern(EmpresaComponent.PASSWORD_PATTERN)
+      ]],
+      confirmarContrasena: [{ value: '', disbled: true }, Validators.required],
+      }, { validators: this.passwordMatchValidator
+    });
+  }
+
+  passwordMatchValidator(g: FormGroup) {
+    const pass = g.get('nuevaContrasena')?.value;
+    const confirm = g.get('confirmarContrasena')?.value;
+    return pass === confirm ? null : { 'mismatch' : true };
   }
 
   toggleEdit() {
@@ -67,6 +86,15 @@ export class EmpresaComponent implements OnInit{
       this.isEditingLogo.set(true);
     }
   }
+
+  toggleEditPassword() {
+    if(this.isEditingPassword()) {
+      this.cambiarContrasena();
+  } else {
+    this.isEditingPassword.set(true);
+    this.passwordForm.enable();
+  }
+}
 
   cargarDatos(){
     this.loaderService.show();
@@ -196,5 +224,39 @@ export class EmpresaComponent implements OnInit{
     this.selectedFile.set(null);
     this.fileName.set('');
     this.imagePreview.set(this.empresaData()?.logo || 'http://localhost:3000/uploads/default-logipulse.png');
+  }
+
+  cambiarContrasena() {
+    if(this.passwordForm.valid) {
+      this.loaderService.show();
+
+      // Extraemos el valor del primer campo, que ya pasó las validaciones de patrón y coincidencia
+      const nuevaPass = this.passwordForm.get('nuevaContrasena')?.value;
+
+      this.empresaService.updatePassword(nuevaPass).subscribe({
+        next: (res) => {
+          this.loaderService.hide();
+
+          this.notify.showSuccess(res.message);
+
+          this.cancelarEdicionPassword();
+        },
+        error: (err) => {
+          this.loaderService.hide();
+
+          const erroMsg = err?.error?.message || 'Error al actualizar la contraseña';
+          this.notify.showError(erroMsg);
+        }
+      });
+    } else {
+      this.passwordForm.markAllAsTouched();
+      this.notify.showError('Por favor, verifique que la contraseña cumple con los requisitos.');
+    }
+  }
+
+  cancelarEdicionPassword(){
+    this.isEditingPassword.set(false);
+    this.passwordForm.reset();
+    this.passwordForm.disable();
   }
 }

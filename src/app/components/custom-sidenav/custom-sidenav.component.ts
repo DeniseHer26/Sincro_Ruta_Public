@@ -22,6 +22,7 @@ export type MenuItem = {
 export class CustomSidenavComponent implements OnInit {
   private empresaService = inject(EmpresaService);
   private authService = inject(AuthService);
+  private readonly UPLOADS_URL = 'http://localhost:3000/uploads/';
 
   empresaData = signal<any>(null);
 
@@ -33,6 +34,18 @@ export class CustomSidenavComponent implements OnInit {
 
   profilePicSize = computed(() => this.sideNavCollapsed() ? '32' : '100')
 
+  // Se actualiza automáticamente cuando empresaData() cambia
+  logoUrl = computed(() => {
+    const logo = this.empresaData()?.logo;
+
+    if (!logo || logo === 'default-logipulse.png') {
+      return `${this.UPLOADS_URL}/default-logipulse.png`;
+    }
+
+    // Si por alguna razón el string ya trae la URL completa, no la duplicamos
+    return logo.startsWith('http') ? logo : `${this.UPLOADS_URL}/${logo}`;
+  });
+
   ngOnInit(){
     this.obtenerPerfil();
   }
@@ -40,7 +53,7 @@ export class CustomSidenavComponent implements OnInit {
   obtenerPerfil() {
     this.empresaService.getPerfil().subscribe({
       next: (data) => this.empresaData.set(data),
-      error: (err) => console.error('Error al obtener perfil', err)
+      error: (err) => console.error('Error al obtener perfil en Sidenav', err)
     });
   }
 

@@ -218,3 +218,36 @@
     height: 250px;
   }
 }
+
+/* Contraseña */
+.password-section {
+  padding: 40px;
+  min-height: 350px;
+}
+
+.password-section .description {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.actions-password {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+  justify-content: flex-start; /* Alineado a la izquierda según imagen */
+}
+
+/* Reutilizamos el estilo de los campos para consistencia */
+.field input:disabled {
+  background-color: #d9d9d9 !important;
+  border: 1px solid #999;
+  cursor: not-allowed;
+}
+
+.error-text {
+  color: #d32f2f;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: block;
+}

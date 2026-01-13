@@ -24,4 +24,8 @@ export class EmpresaService {
     formData.append('file', archivo);
     return this.http.post(`${this.apiUrl}/perfil/logo`, formData);
   }
+
+  updatePassword(password: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/perfil/password`, { contrasena: password });
+  }
 }

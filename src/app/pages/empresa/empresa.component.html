@@ -102,10 +102,42 @@
 </mat-tab>
 
       <mat-tab label="Contraseña">
-        <div class="tab-content">
-          <p>Configuración de seguridad para la cuenta de la empresa.</p>
-          </div>
-      </mat-tab>
+  <div class="tab-content password-section">
+    <p class="description">Actualice su contraseña.</p>
+
+    <form [formGroup]="passwordForm">
+      <div class="form-grid">
+        <div class="field">
+          <label>Introduzca su nueva contraseña:</label>
+          <input formControlName="nuevaContrasena" type="password" placeholder="••••••••">
+          @if (passwordForm.get('nuevaContrasena')?.touched && passwordForm.get('nuevaContrasena')?.errors?.['pattern']) {
+            <small class="error-text">La contraseña debe tener letra, número y carácter especial.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label>Repita su nueva contraseña:</label>
+          <input formControlName="confirmarContrasena" type="password" placeholder="••••••••">
+          @if (passwordForm.hasError('mismatch') && passwordForm.get('confirmarContrasena')?.touched) {
+            <small class="error-text">Las contraseñas no coinciden.</small>
+          }
+        </div>
+      </div>
+
+      <div class="actions-password">
+        @if (isEditingPassword()) {
+          <button mat-flat-button class="btn-cancel" type="button" (click)="cancelarEdicionPassword()">
+            Cancelar
+          </button>
+        }
+
+        <button mat-flat-button class="btn-update" type="button" (click)="toggleEditPassword()">
+          {{ isEditingPassword() ? 'Confirme su nueva contraseña' : 'Actualizar Contraseña' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</mat-tab>
 
     </mat-tab-group>
   </main>
