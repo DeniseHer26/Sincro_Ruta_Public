@@ -59,14 +59,24 @@ export class CustomSidenavComponent implements OnInit {
 
   menuItems = signal<MenuItem[]>([
     {
-      icon: 'dashboard',
+      icon: 'analytics',
       label: 'Dashboard',
       route: 'dashboard'
     },
     {
-      icon: 'dashboard',
+      icon: 'apartment',
       label: 'Empresa',
       route: 'empresa'
+    },
+    {
+      icon: 'id_card',
+      label: 'Choferes',
+      route: 'choferes'
+    },
+    {
+      icon: 'local_shipping ',
+      label: 'Unidades de Transporte',
+      route: 'unidades-transporte'
     },
     {
       icon: 'dashboard',

@@ -4,6 +4,7 @@ import { RegisterComponent } from './pages/register/register.component'; // Comp
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component'; // Mainlayout
 import { authGuard } from './services/auth.guard'; // Guardia de autenticación
 import { animation } from '@angular/animations';
+import { ErrorComponent } from './pages/error/error.component';
 
 export const routes: Routes = [
   // 1. Ruta Pública (Login)
@@ -42,6 +43,16 @@ export const routes: Routes = [
         title: 'LogiPulse | Servicios'
       },
       {
+        path: 'choferes',
+        loadComponent: () => import('./pages/chofer/chofer.component').then(m => m.ChoferComponent),
+        title: 'LogiPulse | Choferes'
+      },
+      {
+        path: 'unidades-transporte',
+        loadComponent: () => import('./pages/unidades-transporte/unidades-transporte.component').then(m => m.UnidadesTransporteComponent),
+        title: 'LogiPulse | Unidades de Transporte'
+      },
+      {
         path: 'facturas',
         loadComponent: () => import('./pages/facturas/facturas.component').then(m => m.FacturasComponent),
         title: 'LogiPulse | Facturas'
@@ -50,7 +61,20 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
-
+  {
+    path: 'unauthorized',
+    component: ErrorComponent,
+    data: { code: '401', message: 'No tienes autorizacion para ver esto.'}
+  },
+  {
+    path: 'server-error',
+    component: ErrorComponent,
+    data: { code: '500', message: 'Ocurrio un error en el servidor.'}
+  },
   // Redirección si la ruta no existe
-  { path: '**', redirectTo: 'login' }
+  {
+    path: '**',
+    component: ErrorComponent,
+    data: { code: '404', message: 'La solicitud del cliente está mal formada.' }
+   }
 ];

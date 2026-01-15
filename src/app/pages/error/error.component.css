@@ -1,0 +1,89 @@
+/* Contenedor principal a pantalla completa */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #ffffff;
+  font-family: var(--logipulse-font, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Título del Error (Ej: 400 SOLICITUD INCORRECTA) */
+.error-container h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Logo Circular (Réplica del estilo en tus diseños) */
+.error-container img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: contain;
+  margin-bottom: 50px;
+  /* Sombra suave para dar profundidad */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Mensaje Descriptivo */
+.error-container p {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+
+/* Botón de Acción (Regresar al Inicio) */
+.btn-back {
+  background-color: var(--logipulse-dark-blue, #1a3765);
+  color: white;
+  text-decoration: none;
+  padding: 15px 40px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-back:hover {
+  background-color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer / Copyright (Igual al Login/Register) */
+.error-footer {
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Ajustes para Móviles */
+@media (max-width: 768px) {
+  .error-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .error-container img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .error-container p {
+    font-size: 1.2rem;
+  }
+}

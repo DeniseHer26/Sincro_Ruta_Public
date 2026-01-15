@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Editar Chofer' : 'Registrar Nuevo Chofer' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="choferForm" class="form-container">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre Completo</mat-label>
+      <input matInput formControlName="nombre" placeholder="Ej. Juan Pérez">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Número de Licencia</mat-label>
+      <input matInput formControlName="licencia" placeholder="ABC123456">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Teléfono de Contacto</mat-label>
+      <input matInput formControlName="telefono" placeholder="5512345678">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="null">Cancelar</button>
+  <button mat-flat-button color="primary" [disabled]="choferForm.invalid" (click)="guardar()">
+    {{ isEditMode ? 'Actualizar' : 'Registrar' }}
+  </button>
+</mat-dialog-actions>

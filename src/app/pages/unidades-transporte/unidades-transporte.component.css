@@ -1,0 +1,37 @@
+.modulo-container { padding: 30px; background-color: #f5f5f5; }
+
+.header-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+.btn-primary { background-color: var(--logipulse-dark-blue) !important; color: white !important; }
+
+/* Estilos de los Badges */
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+}
+
+.status-available { background-color: #e8f5e9; color: #2e7d32; } /* Verde */
+.status-transit { background-color: #e3f2fd; color: #1565c0; }   /* Azul */
+.status-maintenance { background-color: #fff3e0; color: #ef6c00; } /* Naranja */
+.status-out { background-color: #ffebee; color: #c62828; }         /* Rojo */
+
+.refrigeration-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+  color: #0288d1;
+  margin-left: 5px;
+}
+
+.bold-text { font-weight: 600; color: var(--logipulse-dark-blue); }
+
+.table-container { border-radius: 12px; overflow: hidden; background: white; }
+
+tr.mat-row:hover { background-color: #f8f9fa; }

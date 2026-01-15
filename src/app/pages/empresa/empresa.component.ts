@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-import { Empresa } from '../../core/models/empresa.interface';
+import { Empresa } from '../../core/interfaces/empresa.interface';
 import { NotificacionService } from '../../core/services/notificacion.service';
 import { MatIconModule } from '@angular/material/icon';
 import { LoaderService } from '../../core/loader.service';

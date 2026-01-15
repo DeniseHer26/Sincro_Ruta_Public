@@ -1,0 +1,19 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+  color: var(--logipulse-dark-blue);
+  font-weight: 700;
+}
+
+::ng-deep .mat-mdc-button.mat-mdc-button-base.mat-flat-button {
+  background-color: var(--logipulse-dark-blue);
+}
