@@ -1,0 +1,21 @@
+.grid-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 10px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.full-width { width: 100%; }
+
+.checkbox-row { margin: 10px 0; }
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+  color: var(--logipulse-dark-blue);
+  font-weight: 700;
+}

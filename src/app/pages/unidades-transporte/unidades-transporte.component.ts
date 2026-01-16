@@ -7,11 +7,13 @@ import { UnidadTransporte } from '../../core/interfaces/unidades-transporte.inte
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { EstadoOperativo } from '../../core/enums/estado-operativo.enum';
-import { MatIcon, MatIconModule } from "@angular/material/icon";
-import { MatFormField, MatFormFieldModule, MatLabel } from "@angular/material/form-field";
+import {  MatIconModule } from "@angular/material/icon";
+import { MatFormFieldModule, MatLabel } from "@angular/material/form-field";
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { UnidadTransporteFormDialogComponent } from './components/unidad-transporte-form-dialog/unidad-transporte-form-dialog.component';
 
 @Component({
   selector: 'app-unidades-transporte',
@@ -24,6 +26,7 @@ export class UnidadesTransporteComponent implements OnInit {
   private unidadesService = inject(UnidadesTransporteService);
   private notify = inject(NotificacionService);
   private loader = inject(LoaderService);
+  private dialog = inject(MatDialog);
 
   // Columnas a mostrar basadas en tu Entity
   displayedColumns: string[] = ['placas', 'tipoUnidad', 'chofer', 'capacidad', 'estado', 'acciones'];
@@ -85,4 +88,16 @@ export class UnidadesTransporteComponent implements OnInit {
       default: return '';
     }
   }
+
+  abrirFormulario(unidad?: UnidadTransporte) {
+  const dialogRef = this.dialog.open(UnidadTransporteFormDialogComponent, {
+    width: '600px',
+    data: unidad,
+    disableClose: true
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) this.cargarUnidades();
+  });
+}
 }

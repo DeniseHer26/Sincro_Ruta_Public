@@ -1,27 +1,44 @@
+import { EstatusServicio } from "../enums/estatus-servicio.enum";
+import { Chofer } from "./chofer.interface";
+import { Empresa } from "./empresa.interface";
+import { UnidadTransporte } from "./unidades-transporte.interface";
+
 export interface Servicios {
   idServicio: number;
-  idChofer: number;
+  idEmpresa: number;
+  empresa?: Empresa;
+
+  idUnidadTransporte: number | null;
+  unidadTransporte?: UnidadTransporte | null;
+
+  idChofer: number | null;
+  chofer?: Chofer | null;
+
+  // Fechas y Horarios
   fechaHoraProgramada: Date;
   fechaHoraLlegadaEstimada: Date;
+  fechaHorarInicialReal?: Date;
+  fechaHorarFinalReal?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+
+  // Detalles de Ruta y Carga
   puntoOrigen: string;
   puntoDestino: string;
   descripcionMercancia: string;
-  temperaturaMinimaReq: number;
-  temperaturaMaximaReq: number;
-  equipamientoReq: string;
-  fechaHorarInicialReal: Date;
-  fechaHorarFinalReal: Date;
-  estatusServicio: EstatusServicio;
   peso: number;
-  tiempo: string;
+  tiempo?: string;
   costo: number;
-  createdAt: Date;
-  updatedAt: Date;
+
+  // Requerimientos Técnicos
+  temperaturaMinimaReq?: number;
+  temperaturaMaximaReq?: number;
+  equipamientoReq?: string;
+  estatusServicio: EstatusServicio;
+
+  // Relaciones OneToMany (Opcionales en la vista general)
   facturas?: any[];
   evidenciasEntrega?: any[];
   monioreoRuta?: any[];
   detalles?: any[];
-  empresa?: any[];
-  choferes?: any[];
-  unidadTransporte?: any[];
 }

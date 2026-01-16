@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Editar Unidad' : 'Nueva Unidad de Transporte' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="unidadForm" class="grid-form">
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Placas</mat-label>
+        <input matInput formControlName="placas" placeholder="ABC-1234">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de Unidad</mat-label>
+        <mat-select formControlName="tipoUnidad">
+          <mat-option *ngFor="let tipo of tiposUnidad" [value]="tipo">{{tipo}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Capacidad (Kg)</mat-label>
+        <input matInput type="number" formControlName="capacidadCarga">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="estadoOperativo">
+          <mat-option *ngFor="let estado of estados" [value]="estado">{{estado}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Asignar Chofer</mat-label>
+      <mat-select formControlName="idChofer">
+        <mat-option [value]="null">Sin asignar</mat-option>
+        <mat-option *ngFor="let chofer of choferes()" [value]="chofer.idChofer">
+          {{chofer.nombre}} (Lic: {{chofer.licencia}})
+        </mat-option>
+      </mat-select>
+      <mat-hint>Solo choferes activos de la empresa</mat-hint>
+    </mat-form-field>
+
+    <div class="checkbox-row">
+      <mat-checkbox formControlName="tieneRefrigeracion" color="primary">
+        ¿Cuenta con sistema de refrigeración?
+      </mat-checkbox>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="null">Cancelar</button>
+  <button mat-flat-button color="primary" [disabled]="unidadForm.invalid" (click)="guardar()">
+    {{ isEditMode ? 'Guardar Cambios' : 'Registrar Unidad' }}
+  </button>
+</mat-dialog-actions>
