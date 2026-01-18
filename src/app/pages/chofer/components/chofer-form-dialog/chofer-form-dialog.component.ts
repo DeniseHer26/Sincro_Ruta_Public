@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './chofer-form-dialog.component.html',
   styleUrl: './chofer-form-dialog.component.css'
 })
+
 export class ChoferFormDialogComponent implements OnInit{
   private fb = inject(FormBuilder);
   private choferService = inject(ChoferService);
@@ -64,5 +65,9 @@ export class ChoferFormDialogComponent implements OnInit{
         }
       });
     }
+  }
+
+  cancelar(): void{
+    this.dialogRef.close();
   }
 }

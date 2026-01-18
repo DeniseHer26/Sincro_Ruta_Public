@@ -89,6 +89,8 @@ export class UnidadesTransporteComponent implements OnInit {
     }
   }
 
+  editarUnidad(id: number) {}
+
   abrirFormulario(unidad?: UnidadTransporte) {
   const dialogRef = this.dialog.open(UnidadTransporteFormDialogComponent, {
     width: '600px',

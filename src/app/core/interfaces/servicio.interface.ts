@@ -3,7 +3,7 @@ import { Chofer } from "./chofer.interface";
 import { Empresa } from "./empresa.interface";
 import { UnidadTransporte } from "./unidades-transporte.interface";
 
-export interface Servicios {
+export interface Servicio {
   idServicio: number;
   idEmpresa: number;
   empresa?: Empresa;

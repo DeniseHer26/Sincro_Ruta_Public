@@ -20,7 +20,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="null">Cancelar</button>
+  <button mat-button (click)="cancelar()">Cancelar</button>
   <button mat-flat-button color="primary" [disabled]="choferForm.invalid" (click)="guardar()">
     {{ isEditMode ? 'Actualizar' : 'Registrar' }}
   </button>

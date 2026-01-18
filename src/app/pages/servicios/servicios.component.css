@@ -1,0 +1,47 @@
+.filter-panel {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.route-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+.route-info mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #777;
+}
+
+/* Badges de Estatus */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-pending { background: #fff3e0; color: #ef6c00; } /* Naranja */
+.badge-transit { background: #e3f2fd; color: #1565c0; } /* Azul */
+.badge-success { background: #e8f5e9; color: #2e7d32; } /* Verde */
+.badge-danger { background: #ffebee; color: #c62828; }  /* Rojo */
+
+.full-width { width: 100%; margin-bottom: 10px; }

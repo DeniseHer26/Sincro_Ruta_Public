@@ -69,7 +69,7 @@ export class CustomSidenavComponent implements OnInit {
       route: 'empresa'
     },
     {
-      icon: 'id_card',
+      icon: 'account_box',
       label: 'Choferes',
       route: 'choferes'
     },
@@ -79,11 +79,11 @@ export class CustomSidenavComponent implements OnInit {
       route: 'unidades-transporte'
     },
     {
-      icon: 'dashboard',
+      icon: 'front_loader',
       label: 'Servicios',
       route: 'servicios'
     },{
-      icon: 'dashboard',
+      icon: 'receipt_long',
       label: 'Facturas',
       route: 'facturas'
     }

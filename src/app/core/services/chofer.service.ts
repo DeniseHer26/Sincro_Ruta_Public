@@ -23,7 +23,7 @@ export class ChoferService {
   }
 
   actualizarChofer(id: number, chofer: Partial<Chofer>): Observable<any> {
-    return this.http.put<Chofer>(`${this.apiUrl}/${id}`, chofer);
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, chofer);
   }
 
   desactivarChofer(id: number): Observable<any> {

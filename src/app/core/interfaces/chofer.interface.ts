@@ -1,12 +1,12 @@
 import { Empresa } from "./empresa.interface";
-import { unidadesTransporte } from "./unidades-transporte.interface";
+import { UnidadTransporte } from "./unidades-transporte.interface";
 
 export interface Chofer {
   idChofer: number;
   servicios?: any[];
   idEmpresa: number;
   empresa?: Empresa;
-  unidadTransporte?: unidadesTransporte | null;
+  unidadTransporte?: UnidadTransporte | null;
   idUnidadTransporte?: number | null;
   nombre: string;
   licencia: string;

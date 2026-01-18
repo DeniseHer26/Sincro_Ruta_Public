@@ -1,8 +1,61 @@
-.modulo-container { padding: 30px; background-color: #f5f5f5; }
+.modulo-container {
+  padding: 30px;
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 64px);
+}
 
-.header-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
 
-.btn-primary { background-color: var(--logipulse-dark-blue) !important; color: white !important; }
+.header-section h2 {
+  font-family: var(--logipulse-font);
+  font-weight: 700;
+  color: var(--logipulse-dark-blue);
+  margin: 0;
+}
+
+.btn-primary {
+  background-color: var(--logipulse-dark-blue) !important;
+  color: white !important;
+}
+
+.search-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.table-container {
+  background: white ;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+table {
+  width:  100%;
+}
+
+.mat-column-acciones {
+  width: 120px;
+  text-align: center;
+}
+
+/* Estilos de cabecera de tabla */
+th.mat-header-cell {
+  background-color: #f8f9fa;
+  color: var(--logipulse-dark-blue);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Efecto hover en las filas */
+tr.mat-row:hover {
+  background-color: #f1f4f9;
+  cursor: pointer;
+}
 
 /* Estilos de los Badges */
 .status-badge {
@@ -30,8 +83,11 @@
   margin-left: 5px;
 }
 
-.bold-text { font-weight: 600; color: var(--logipulse-dark-blue); }
+.bold-text {
+  font-weight: 600;
+  color: var(--logipulse-dark-blue);
+}
 
-.table-container { border-radius: 12px; overflow: hidden; background: white; }
-
-tr.mat-row:hover { background-color: #f8f9fa; }
+tr.mat-row:hover {
+  background-color: #f8f9fa;
+}
