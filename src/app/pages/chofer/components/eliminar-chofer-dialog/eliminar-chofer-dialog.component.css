@@ -1,0 +1,26 @@
+.dialog-title {
+  color: var(--logipulse-dark-blue);
+  font-weight: 700;
+}
+
+.dialog-content {
+  font-size: 1rem;
+  color: #333;
+  padding-bottom: 20px;
+}
+
+.dialog-content strong {
+  color: var(--logipulse-dark-blue);
+}
+
+.warning-text {
+  font-size: 0.9rem;
+  color: #d32f2f; /* Un rojo suave para la advertencia */
+  margin-top: 10px;
+}
+
+/* Aseguramos que los botones tengan el estilo de Material Design */
+/* ::ng-deep .mat-mdc-button.mat-warn,
+::ng-deep .mat-mdc-unelevated-button.mat-warn {
+  El color warn ya lo maneja Angular Material, pero podemos ajustarlo si lo definimos en el theme
+} */

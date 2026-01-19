@@ -1,0 +1,17 @@
+<h2 mat-dialog-title class="dialog-title">Confirmar Eliminación</h2>
+
+<mat-dialog-content class="dialog-content">
+  <p>
+    ¿Seguro que quiere eliminar al chofer <strong> '{{ data.nombre }}'</strong>?
+  </p>
+  <p class="warning-text">
+    Esta acción dará de baja al chofer y no podrá ser asignado a nuevos servicios.
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-flat-button color="warn" (click)="confirmarEliminacion()" mat-dialog-close>
+    Eliminar
+  </button>
+</mat-dialog-actions>

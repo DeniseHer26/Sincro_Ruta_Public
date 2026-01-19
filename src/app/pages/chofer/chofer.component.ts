@@ -12,6 +12,7 @@ import { LoaderService } from '../../core/loader.service';
 import { Chofer } from '../../core/interfaces/chofer.interface';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ChoferFormDialogComponent } from './components/chofer-form-dialog/chofer-form-dialog.component';
+import { EliminarChoferDialogComponent } from './components/eliminar-chofer-dialog/eliminar-chofer-dialog.component';
 
 @Component({
   selector: 'app-chofer',
@@ -40,8 +41,9 @@ export class ChoferComponent implements OnInit {
     this.loader.show();
     this.choferService.getChoferes().subscribe({
       next: (data) => {
-        // Solo mostramos choferes activos por defecto
-        this.dataSource.data = data.filter(c => c.active);
+        // Filtramos y asignamos en un solo paso
+        this.dataSource.data = (data ?? []).filter(c => c.active);
+        // Sincronizar el ordenamiento
         this.dataSource.sort = this.sort;
         this.loader.hide();
       },
@@ -58,18 +60,24 @@ export class ChoferComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  eliminarChofer(id: number) {
-    if (confirm('¿Está seguro de que desea dar de baja a este chofer?')) {
-      this.choferService.desactivarChofer(id).subscribe({
-        next: () => {
-          this.notify.showSuccess('Chofer desactivado correctamente');
-          this.cargarChoferes(); // Recargamos la tabla
-        }
-      });
-    }
+  eliminarChofer(chofer: Chofer) {
+    const dialogRef = this.dialog.open(EliminarChoferDialogComponent, {
+      width: '480px',
+      data: chofer,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Resultado del diálogo de eliminación:', result);
+      if(result === true) {
+        console.log('Llamando a cargarChoferes....');
+        this.cargarChoferes(); // Recarga la tabla si hubo cambios
+      }
+    });
   }
 
   abrirFormulario(chofer?: Chofer) {
+    console.log('Datos del chofer a actualizar:', chofer);
     const dialogRef = this.dialog.open(ChoferFormDialogComponent, {
       width: '450px',
       data: chofer,

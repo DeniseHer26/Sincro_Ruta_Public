@@ -1,8 +1,4 @@
 import {
-  MatButton,
-  MatButtonModule
-} from "./chunk-RAN4UP2F.js";
-import {
   Overlay,
   OverlayConfig,
   OverlayModule
@@ -23,6 +19,10 @@ import {
   transition,
   trigger
 } from "./chunk-FMNPNRSK.js";
+import {
+  MatButton,
+  MatButtonModule
+} from "./chunk-RAN4UP2F.js";
 import {
   BreakpointObserver,
   Breakpoints,
