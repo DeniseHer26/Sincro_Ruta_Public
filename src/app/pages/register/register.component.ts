@@ -93,7 +93,7 @@ export class RegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.loaderService.show();
-      const payload = this.registerForm.value;
+      const { confirmarContrasena, ...payload } = this.registerForm.value;
         this.registerService.register(payload).subscribe({
           next: (response: any) => {
             console.log('Registro de Usuario Exitoso', response);

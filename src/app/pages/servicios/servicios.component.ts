@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-servicios',
@@ -34,7 +35,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule],
+    MatTooltipModule,
+    RouterModule
+  ],
   templateUrl: './servicios.component.html',
   styleUrl: './servicios.component.css'
 })
@@ -43,6 +46,7 @@ export class ServiciosComponent {
   private fb = inject(FormBuilder);
   private notify = inject(NotificacionService);
   private loader = inject(LoaderService);
+  public router = inject(Router);
 
   displayedColumns: string[] = ['idServicio', 'fecha', 'ruta', 'asignacion', 'costo', 'estatus', 'acciones'];
   dataSource = new MatTableDataSource<Servicio>([]);
@@ -70,11 +74,11 @@ export class ServiciosComponent {
     this.loader.show();
     const filtros = this.filterForm.value;
 
-    const queryParams = {
-      ...filtros,
-      fechaInicio: filtros.fechaInicio?.toISOString(),
-      fechaFin: filtros.fechaFin?.toISOString()
-    };
+    const queryParams: any = {};
+
+    if (filtros.estatus?.length) queryParams.estatus = filtros.estatus;
+    if (filtros.fechaInicio) queryParams.fechaInicio = filtros.fechaInicio.toISOString();
+    if (filtros.fechaFin) queryParams.fechaFin = filtros.fechaFin.toISOString();
 
     this.servicioService.getServicios(queryParams).subscribe({
       next: (data) => {

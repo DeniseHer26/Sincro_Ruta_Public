@@ -3,6 +3,7 @@ import { inject, Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { UnidadTransporte } from "../interfaces/unidades-transporte.interface";
 import { EstadoOperativo } from "../enums/estado-operativo.enum";
+import { environment } from "../../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ import { EstadoOperativo } from "../enums/estado-operativo.enum";
 
 export class UnidadesTransporteService {
   private http = inject(HttpClient);
-  // URL base coincidente con @Controller('unidades-transporte')
-  private readonly apiUrl = 'http://localhost:3000/unidades-transporte';
+  // URL base apuntando a tu controlador 'unidades-transporte'
+  private readonly apiUrl = `${environment.apiUrl}/unidades-transporte`;
 
   /**
    * Obtiene todas las unidades de la empresa (activas)

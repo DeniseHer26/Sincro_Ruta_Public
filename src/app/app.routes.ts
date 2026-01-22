@@ -5,6 +5,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { authGuard } from './services/auth.guard'; // Guardia de autenticación
 import { animation } from '@angular/animations';
 import { ErrorComponent } from './pages/error/error.component';
+import { ServicioFormComponent } from './pages/servicios/components/servicio-form/servicio-form.component';
 
 export const routes: Routes = [
   // 1. Ruta Pública (Login)
@@ -41,6 +42,10 @@ export const routes: Routes = [
         path: 'servicios',
         loadComponent: () => import('./pages/servicios/servicios.component').then(m => m.ServiciosComponent),
         title: 'LogiPulse | Servicios'
+      },
+      {
+        path: 'servicios/nuevo',
+        component: ServicioFormComponent
       },
       {
         path: 'choferes',

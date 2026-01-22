@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, delay } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/empresas';
+  // URL base apuntando a tu controlador 'empresas'
+  private apiUrl = `${environment.apiUrl}/empresas`;
 
   constructor() { }
 

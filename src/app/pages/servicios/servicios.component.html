@@ -1,7 +1,7 @@
 <div class="modulo-container">
   <div class="header-section">
     <h2>Gestión de Servicios Logísticos</h2>
-    <button mat-raised-button class="btn-primary" (click)="null">
+    <button mat-raised-button class="btn-primary" (click)="router.navigate(['/servicios/nuevo'])">
       <mat-icon>add_road</mat-icon> Programar Servicio
     </button>
   </div>
@@ -27,10 +27,12 @@
       </mat-form-field>
 
       <div class="filter-actions">
-        <button mat-flat-button color="primary" (click)="cargarServicios()">
+        <button mat-flat-button class="btn-primary" (click)="cargarServicios()">
           <mat-icon>filter_list</mat-icon> Aplicar
         </button>
-        <button mat-button (click)="filterForm.reset(); cargarServicios()">Limpiar</button>
+        <button mat-flat-button class="btn-secondary" (click)="filterForm.reset(); cargarServicios()">
+          <mat-icon>delete</mat-icon> Limpiar
+        </button>
       </div>
     </form>
   </div>

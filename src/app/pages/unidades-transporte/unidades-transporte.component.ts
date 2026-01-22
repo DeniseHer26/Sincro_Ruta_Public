@@ -11,14 +11,28 @@ import {  MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule, MatLabel } from "@angular/material/form-field";
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { UnidadTransporteFormDialogComponent } from './components/unidad-transporte-form-dialog/unidad-transporte-form-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-unidades-transporte',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatIconModule, MatFormFieldModule, MatLabel, MatPaginatorModule, MatTooltipModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatLabel,
+    MatTooltipModule,
+    MatIconModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
   templateUrl: './unidades-transporte.component.html',
   styleUrl: './unidades-transporte.component.css'
 })
@@ -89,7 +103,13 @@ export class UnidadesTransporteComponent implements OnInit {
     }
   }
 
-  editarUnidad(id: number) {}
+  nuevaUnidad(unidad?: UnidadTransporte) {
+    this.abrirFormulario(unidad);
+  }
+
+  editarUnidad(unidad: UnidadTransporte) {
+  this.abrirFormulario(unidad); // Ahora 'unidad' es el objeto completo
+}
 
   abrirFormulario(unidad?: UnidadTransporte) {
   const dialogRef = this.dialog.open(UnidadTransporteFormDialogComponent, {
@@ -101,5 +121,5 @@ export class UnidadesTransporteComponent implements OnInit {
   dialogRef.afterClosed().subscribe(result => {
     if (result) this.cargarUnidades();
   });
-}
+  }
 }

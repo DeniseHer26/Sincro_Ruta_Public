@@ -17,7 +17,16 @@ import { EliminarChoferDialogComponent } from './components/eliminar-chofer-dial
 @Component({
   selector: 'app-chofer',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatSortModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule ],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule
+  ],
   templateUrl: './chofer.component.html',
   styleUrl: './chofer.component.css'
 })

@@ -3,6 +3,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Servicio } from "../interfaces/servicio.interface";
 import { FilterServiciosDto } from "../interfaces/filter-servicios.interface";
+import { environment } from "../../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { FilterServiciosDto } from "../interfaces/filter-servicios.interface";
 
 export  class ServicioService {
   private http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:3000/servicios';
+  // URL base apuntando a tu controlador 'servicios'
+  private readonly apiUrl = `${environment.apiUrl}/servicios`;
 
   /**
    * Obtiene todos los servicios con soporte para filtros dinamicos(estatus y fechas)
@@ -19,15 +21,20 @@ export  class ServicioService {
   getServicios(filtros?: FilterServiciosDto): Observable<Servicio[]> {
     let params = new HttpParams();
 
-    if(filtros) {
-      if(filtros.estatus && filtros.estatus.length > 0) {
-        // Para pasar arreglos en la URL
-        filtros.estatus.forEach(e => params.append('estatus', e));
-      }
-      if(filtros.fechaInicio) params = params.set('fechaInicio', filtros.fechaInicio);
-      if(filtros.fechaFin) params = params.set('fechaFin', filtros.fechaFin);
+    if (filtros) {
+    if (filtros.estatus && filtros.estatus.length > 0) {
+      filtros.estatus.forEach(e => {
+        params = params.append('estatus', e);
+      });
     }
-    return this.http.get<Servicio[]>(this.apiUrl, { params });
+    if (filtros.fechaInicio) {
+      params = params.set('fechaInicio', filtros.fechaInicio);
+    }
+    if (filtros.fechaFin) {
+      params = params.set('fechaFin', filtros.fechaFin);
+    }
+  }
+  return this.http.get<Servicio[]>(this.apiUrl, { params });
   }
 
   /**

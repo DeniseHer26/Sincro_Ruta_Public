@@ -1,0 +1,51 @@
+<div class="detalle-header">
+  <h2 mat-dialog-title>Detalle del Servicio #{{ data.id }}</h2>
+  <span class="status-badge" [ngClass]="getEstatusClass(servicio()?.estatusServicio!)">
+    {{ servicio()?.estatusServicio }}
+  </span>
+</div>
+
+<mat-dialog-content *ngIf="servicio() as s">
+  <div class="detalle-grid">
+
+    <div class="info-section">
+      <div class="data-group">
+        <h3><mat-icon>route</mat-icon> Itinerario</h3>
+        <p><strong>Origen:</strong> {{ s.puntoOrigen }}</p>
+        <p><strong>Destino:</strong> {{ s.puntoDestino }}</p>
+        <p><strong>Salida Programada:</strong> {{ s.fechaHoraProgramada | date:'medium' }}</p>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="data-group">
+        <h3><mat-icon>inventory_2</mat-icon> Carga y Costo</h3>
+        <p><strong>Mercancía:</strong> {{ s.descripcionMercancia }}</p>
+        <p><strong>Peso:</strong> {{ s.peso | number }} kg</p>
+        <p><strong>Costo Total:</strong> {{ s.costo | currency }}</p>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="data-group">
+        <h3><mat-icon>local_shipping</mat-icon> Asignación</h3>
+        <p><strong>Chofer:</strong> {{ s.chofer?.nombre || 'Pendiente' }}</p>
+        <p><strong>Unidad:</strong> {{ s.unidadTransporte?.placas || 'Pendiente' }}</p>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <google-map height="100%" width="100%" [zoom]="10">
+        <map-directions-renderer
+          *ngIf="directionsResults$ | async as results"
+          [directions]="results">
+        </map-directions-renderer>
+      </google-map>
+    </div>
+
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

@@ -2,6 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Chofer } from '../interfaces/chofer.interface';
 import { Observable } from "rxjs";
+import { environment } from "../../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Observable } from "rxjs";
 export class ChoferService {
   private http = inject(HttpClient);
   // URL base apuntando a tu controlador 'choferes'
-  private readonly apiUrl = 'http://localhost:3000/choferes';
+  private readonly apiUrl = `${environment.apiUrl}/choferes`;
 
   /**
    * Obtiene todos los choferes activos de la empresa.

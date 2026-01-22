@@ -1,3 +1,27 @@
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header-section h2 {
+  font-family: var(--logipulse-font);
+  font-weight: 700;
+  color: var(--logipulse-dark-blue);
+  margin: 0;
+}
+
+.btn-primary {
+  background-color: var(--logipulse-dark-blue) !important;
+  color: white !important;
+}
+
+.btn-secondary {
+  background-color: black !important;
+  color: white !important;
+}
+
 .filter-panel {
   background: white;
   padding: 20px;
@@ -14,6 +38,7 @@
 
 .filter-actions {
   display: flex;
+  margin-bottom: 25px;
   gap: 10px;
 }
 
