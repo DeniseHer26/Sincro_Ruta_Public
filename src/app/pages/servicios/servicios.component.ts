@@ -18,6 +18,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterModule } from '@angular/router';
+import { ServicioDialogComponent } from './components/servicio-dialog/servicio-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-servicios',
@@ -46,7 +48,10 @@ export class ServiciosComponent {
   private fb = inject(FormBuilder);
   private notify = inject(NotificacionService);
   private loader = inject(LoaderService);
+  private dialog = inject(MatDialog);
+
   public router = inject(Router);
+
 
   displayedColumns: string[] = ['idServicio', 'fecha', 'ruta', 'asignacion', 'costo', 'estatus', 'acciones'];
   dataSource = new MatTableDataSource<Servicio>([]);
@@ -97,6 +102,20 @@ export class ServiciosComponent {
   aplicarBusqueda(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  detalleServicio(servicio: Servicio) {
+     const dialogRef = this.dialog.open(ServicioDialogComponent, {
+      width: '1000px',
+      data: servicio,
+      disableClose: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === true) {
+        this.cargarServicios()
+      }
+    });
   }
 
   cancelarServicio(id: number) {

@@ -29,7 +29,7 @@ export class ServicioDialogComponent implements OnInit {
   directionsResults$: Observable<google.maps.DirectionsResult | undefined> = of(undefined);
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { id: number },
+    @Inject(MAT_DIALOG_DATA) public data: Servicio,
     private dialogRef: MatDialogRef<ServicioDialogComponent>
   ) {}
 
@@ -39,7 +39,7 @@ export class ServicioDialogComponent implements OnInit {
 
   cargarDetalle() {
     this.loader.show();
-    this.servicioService.getServicioById(this.data.id).subscribe({
+    this.servicioService.getServicioById(this.data.idServicio).subscribe({
       next: (data) => {
         this.servicio.set(data);
         this.trazarRuta(data.puntoOrigen, data.puntoDestino);

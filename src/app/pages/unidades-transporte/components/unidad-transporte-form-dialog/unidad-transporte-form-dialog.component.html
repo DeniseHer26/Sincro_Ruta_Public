@@ -1,4 +1,6 @@
-<h2 mat-dialog-title>{{ isEditMode ? 'Editar Unidad' : 'Nueva Unidad de Transporte' }}</h2>
+<h2 mat-dialog-title>
+  {{ isReadOnly ? 'Detalle de Unidad' : (isEditMode ? 'Editar Unidad' : 'Nueva Unidad') }}
+</h2>
 
 <mat-dialog-content>
   <form [formGroup]="unidadForm" class="grid-form">
@@ -52,8 +54,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="null">Cancelar</button>
-  <button mat-flat-button color="primary" [disabled]="unidadForm.invalid" (click)="guardar()">
+  <button mat-button (click)="cancelar()">{{ isReadOnly ? 'Cerrar' : 'Cancelar' }}</button>
+  <button mat-flat-button color="primary" [disabled]="unidadForm.invalid" (click)="guardar()" [disabled]="unidadForm.invalid">
     {{ isEditMode ? 'Guardar Cambios' : 'Registrar Unidad' }}
   </button>
 </mat-dialog-actions>

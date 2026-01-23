@@ -103,18 +103,22 @@ export class UnidadesTransporteComponent implements OnInit {
     }
   }
 
-  nuevaUnidad(unidad?: UnidadTransporte) {
-    this.abrirFormulario(unidad);
+  nuevaUnidad() {
+    this.abrirFormulario(undefined, false);
   }
 
   editarUnidad(unidad: UnidadTransporte) {
-  this.abrirFormulario(unidad); // Ahora 'unidad' es el objeto completo
-}
+    this.abrirFormulario(unidad, false); // Ahora 'unidad' es el objeto completo
+  }
 
-  abrirFormulario(unidad?: UnidadTransporte) {
+  detalleUnidad(unidad: UnidadTransporte) {
+    this.abrirFormulario(unidad, true); // Ahora 'unidad' es el objeto completo
+  }
+
+  abrirFormulario(unidad?: UnidadTransporte, isReadOnly: boolean = false) {
   const dialogRef = this.dialog.open(UnidadTransporteFormDialogComponent, {
     width: '600px',
-    data: unidad,
+    data: { unidad,isReadOnly },
     disableClose: true
   });
 

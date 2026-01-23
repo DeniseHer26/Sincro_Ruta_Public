@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
   selector: 'app-unidad-transporte-form-dialog',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule,
-    MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule],
+    MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule, MatDialogModule],
   templateUrl: './unidad-transporte-form-dialog.component.html',
   styleUrl: './unidad-transporte-form-dialog.component.css'
 })
@@ -31,6 +31,7 @@ export class UnidadTransporteFormDialogComponent implements OnInit {
 
   unidadForm!: FormGroup;
   isEditMode: boolean = false;
+  isReadOnly: boolean = false;
 
   // Lista de choferes para el dropdown
   choferes = signal<Chofer[]>([]);
@@ -39,15 +40,20 @@ export class UnidadTransporteFormDialogComponent implements OnInit {
   tiposUnidad = ['Camioneta 1.5 Ton', 'Camioneta 3.5 Ton', 'Rabón', 'Torton', 'Tráiler'];
   estados = Object.values(EstadoOperativo);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: UnidadTransporte) {
-    this.isEditMode = !!data;
-  }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { unidad: UnidadTransporte, isReadOnly: boolean }
+    ){
+      this.isEditMode = !!data.unidad;
+      this.isReadOnly = data.isReadOnly;
+    }
 
   ngOnInit() {
     this.initForm();
     this.cargarChoferes();
     if (this.isEditMode) {
-      this.unidadForm.patchValue(this.data);
+      this.unidadForm.patchValue(this.data.unidad);
+    } if (this.isReadOnly) {
+      this.unidadForm.disable();
     }
   }
 
@@ -72,11 +78,11 @@ export class UnidadTransporteFormDialogComponent implements OnInit {
   }
 
   guardar() {
-    if (this.unidadForm.invalid) return;
-    const payload = this.unidadForm.value;
+    if (this.unidadForm.invalid || this.isReadOnly) return;
+    const payload = this.unidadForm.getRawValue(); // getRawValue obtiene datos incluso si están disabled
 
     const request = this.isEditMode
-      ? this.unidadesService.updateUnidad(this.data.idUnidadTransporte, payload)
+      ? this.unidadesService.updateUnidad(this.data.unidad.idUnidadTransporte, payload)
       : this.unidadesService.createUnidad(payload);
 
     request.subscribe({
@@ -86,5 +92,9 @@ export class UnidadTransporteFormDialogComponent implements OnInit {
       },
       error: (err) => this.notify.showError(err.error?.message || 'Error en la operación')
     });
+  }
+
+  cancelar(): void{
+    this.dialogRef.close();
   }
 }
