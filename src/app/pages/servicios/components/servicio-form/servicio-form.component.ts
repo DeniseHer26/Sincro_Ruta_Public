@@ -23,6 +23,7 @@ import { GoogleMapsModule, MapDirectionsService } from '@angular/google-maps';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { WeatherService } from '../../../../core/services/weather.service';
 import { environment } from '../../../../../environments/environment.development';
 
 @Component({
@@ -43,6 +44,7 @@ export class ServicioFormComponent implements OnInit {
   private notify = inject(NotificacionService);
   private loader = inject(LoaderService);
   private directionsService = inject(MapDirectionsService);
+  private weatherService = inject(WeatherService);
 
   @ViewChild('origenInput') origenInput!: ElementRef;
   @ViewChild('destinoInput') destinoInput!: ElementRef;
@@ -58,6 +60,10 @@ export class ServicioFormComponent implements OnInit {
   // Señales de Validacion
   origenValido = signal(false);
   destinoValido = signal(false);
+  // Señal para mostrar alertas de tráfico
+  alertaTrafico = signal<string | null>(null);
+  //
+  climaInfo = signal<any>(null);
 
   // Observable que guardará el resultado de la ruta
   directionsResults$: Observable<google.maps.DirectionsResult | undefined> = of(undefined);
@@ -181,20 +187,72 @@ export class ServicioFormComponent implements OnInit {
   calcularRuta() {
     const origen = this.infoForm.get('puntoOrigen')?.value;
     const destino = this.infoForm.get('puntoDestino')?.value;
+    const fechaSalida = this.infoForm.get('fechaHoraProgramada')?.value;
 
     if (!origen || !destino) return;
 
     const request: google.maps.DirectionsRequest = {
       origin: origen,
       destination: destino,
-      travelMode: google.maps.TravelMode.DRIVING
+      travelMode: google.maps.TravelMode.DRIVING,
+
+      provideRouteAlternatives: true,
+      drivingOptions: {
+      departureTime: new Date(fechaSalida), // Usamos la fecha del formulario
+      trafficModel: google.maps.TrafficModel.PESSIMISTIC // Para ser precavidos
+    }
     };
 
     // Llamamos al servicio de Google
     this.directionsResults$ = this.directionsService.route(request).pipe(
-      map(response => response.result)
-    );
+    map(response => {
+      const result = response.result;
+      if (result) {
+        const route = result.routes[0].legs[0];
+        this.analizarRetrasos(route);
+
+        // EXTRAEMOS COORDENADAS PARA EL CLIMA
+        const lat = route.end_location.lat();
+        const lng = route.end_location.lng();
+        this.obtenerPronostico(lat, lng);
+      }
+      return result;
+    })
+  );
   }
+
+  analizarRetrasos(route: google.maps.DirectionsLeg) {
+  const duracionNormal = route.duration?.value || 0; // Segundos
+  const duracionTrafico = route.duration_in_traffic?.value || duracionNormal;
+
+  // Si el tráfico aumenta el tiempo en más de un 25%
+  const retrasoPorcentaje = ((duracionTrafico - duracionNormal) / duracionNormal) * 100;
+
+  if (retrasoPorcentaje > 25) {
+    this.alertaTrafico.set(
+      `⚠️ Alerta de Retraso: La ruta presenta congestión severa o incidentes. El tiempo estimado aumentó un ${Math.round(retrasoPorcentaje)}%. Considere cambiar el horario o la ruta.`
+    );
+  } else {
+    this.alertaTrafico.set(null);
+  }
+}
+
+obtenerPronostico(lat: number, lng: number) {
+  this.weatherService.getForecast(lat, lng).subscribe({
+    next: (data: any) => {
+      // Buscamos el pronóstico más cercano a la hora de llegada estimada
+      const fechaLlegada = new Date(this.infoForm.get('fechaHoraLlegadaEstimada')?.value).getTime();
+
+      // OpenWeather entrega una lista cada 3 horas, buscamos la más próxima
+      const pronosticoCercano = data.list.reduce((prev: any, curr: any) => {
+        return (Math.abs(curr.dt * 1000 - fechaLlegada) < Math.abs(prev.dt * 1000 - fechaLlegada) ? curr : prev);
+      });
+
+      this.climaInfo.set(pronosticoCercano);
+    },
+    error: () => this.notify.showError('No se pudo obtener el pronóstico del clima')
+  });
+}
 
   // Si el usuario borra o cambia el texto manualmente sin seleccionar de la lista
   onInputChange(campo: 'origen' | 'destino') {

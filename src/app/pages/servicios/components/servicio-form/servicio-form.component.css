@@ -99,3 +99,54 @@
 ::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: var(--logipulse-dark-blue) !important;
 }
+
+.alert-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  border-left: 5px solid #ff9800;
+}
+
+.warn-bg {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.alert-box mat-icon {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+}
+
+.weather-card {
+  display: flex;
+  align-items: center;
+  background: #e1f5fe; /* Azul muy claro */
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  border-left: 5px solid #0288d1;
+  gap: 15px;
+}
+
+.weather-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.temp {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #01579b;
+}
+
+.weather-desc p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #0277bd;
+}

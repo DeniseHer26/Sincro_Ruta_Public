@@ -124,6 +124,7 @@
 
         <div class="map-preview mat-elevation-z2" *ngIf="apiLoaded()">
           <google-map height="350px" width="100%" [center]="center" [zoom]="zoom">
+            <map-traffic-layer></map-traffic-layer>
             <map-directions-renderer
               *ngIf="directionsResults$ | async as results"
               [directions]="results">
@@ -142,6 +143,33 @@
         <mat-icon>schedule</mat-icon>
         <span>Duración: {{ results.routes[0].legs[0].duration?.text }}</span>
       </div>
+      <div class="resumen-container">
+
+  <div class="alerts-container">
+  <div class="alert-box warn-bg" *ngIf="alertaTrafico()">
+    <mat-icon>warning</mat-icon>
+    <span>{{ alertaTrafico() }}</span>
+  </div>
+
+  <div class="weather-card" *ngIf="climaInfo()">
+    <div class="weather-main">
+      <img [src]="'http://openweathermap.org/img/wn/' + climaInfo().weather[0].icon + '.png'" alt="clima">
+      <span class="temp">{{ climaInfo().main.temp | number:'1.0-0' }}°C</span>
+    </div>
+    <div class="weather-desc">
+      <strong>Pronóstico en destino:</strong>
+      <p>{{ climaInfo().weather[0].description | titlecase }}</p>
+      <small *ngIf="climaInfo().weather[0].main === 'Rain'" class="text-danger">
+        ⚠️ Se recomienda precaución por lluvia durante la descarga.
+      </small>
+    </div>
+  </div>
+</div>
+
+  <div class="map-preview mat-elevation-z2" *ngIf="apiLoaded()">
+    </div>
+
+  </div>
 
       </div>
 
