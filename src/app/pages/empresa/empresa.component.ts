@@ -10,11 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoaderService } from '../../core/loader.service';
 
 @Component({
-  selector: 'app-empresa',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatTabsModule, MatIconModule],
-  templateUrl: './empresa.component.html',
-  styleUrl: './empresa.component.css'
+    selector: 'app-empresa',
+    imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatTabsModule, MatIconModule],
+    templateUrl: './empresa.component.html',
+    styleUrl: './empresa.component.css'
 })
 export class EmpresaComponent implements OnInit{
   public static readonly PASSWORD_PATTERN = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$/;

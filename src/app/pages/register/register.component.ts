@@ -14,19 +14,18 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 import { NotificacionService } from '../../core/services/notificacion.service';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    LoaderComponent,
-    RouterLink,
-],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        LoaderComponent,
+        RouterLink,
+    ],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   private fb = inject(FormBuilder);

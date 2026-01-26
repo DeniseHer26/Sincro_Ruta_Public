@@ -10,11 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-chofer-form-dialog',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule],
-  templateUrl: './chofer-form-dialog.component.html',
-  styleUrl: './chofer-form-dialog.component.css'
+    selector: 'app-chofer-form-dialog',
+    imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+    templateUrl: './chofer-form-dialog.component.html',
+    styleUrl: './chofer-form-dialog.component.css'
 })
 
 export class ChoferFormDialogComponent implements OnInit{

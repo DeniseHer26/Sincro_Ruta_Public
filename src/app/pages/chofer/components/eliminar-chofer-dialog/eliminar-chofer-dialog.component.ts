@@ -7,11 +7,10 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-eliminar-chofer-dialog',
-  standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule],
-  templateUrl: './eliminar-chofer-dialog.component.html',
-  styleUrl: './eliminar-chofer-dialog.component.css'
+    selector: 'app-eliminar-chofer-dialog',
+    imports: [CommonModule, MatDialogModule, MatButtonModule],
+    templateUrl: './eliminar-chofer-dialog.component.html',
+    styleUrl: './eliminar-chofer-dialog.component.css'
 })
 export class EliminarChoferDialogComponent {
   private choferService = inject(ChoferService);

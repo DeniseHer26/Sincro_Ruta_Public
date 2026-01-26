@@ -2,11 +2,10 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-error',
-  standalone: true,
-  imports: [],
-  templateUrl: './error.component.html',
-  styleUrl: './error.component.css'
+    selector: 'app-error',
+    imports: [],
+    templateUrl: './error.component.html',
+    styleUrl: './error.component.css'
 })
 export class ErrorComponent {
   private route = inject (ActivatedRoute);

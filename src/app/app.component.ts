@@ -6,12 +6,11 @@ import { AutoLogoutService } from './core/auto-logout.service';
 import { slideInAnimation } from './components/animations/animations';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ RouterOutlet ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  animations: [slideInAnimation]
+    selector: 'app-root',
+    imports: [RouterOutlet],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    animations: [slideInAnimation]
 })
 export class AppComponent {
   private AutoLogoutService = inject(AutoLogoutService);

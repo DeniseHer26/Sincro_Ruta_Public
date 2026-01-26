@@ -15,12 +15,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-unidad-transporte-form-dialog',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule,
-    MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule, MatDialogModule],
-  templateUrl: './unidad-transporte-form-dialog.component.html',
-  styleUrl: './unidad-transporte-form-dialog.component.css'
+    selector: 'app-unidad-transporte-form-dialog',
+    imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule,
+        MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule, MatDialogModule],
+    templateUrl: './unidad-transporte-form-dialog.component.html',
+    styleUrl: './unidad-transporte-form-dialog.component.css'
 })
 export class UnidadTransporteFormDialogComponent implements OnInit {
   private fb = inject(FormBuilder);

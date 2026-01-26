@@ -17,24 +17,23 @@ import { UnidadTransporteFormDialogComponent } from './components/unidad-transpo
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-unidades-transporte',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatInputModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatLabel,
-    MatTooltipModule,
-    MatIconModule,
-    MatDialogModule,
-    MatButtonModule
-  ],
-  templateUrl: './unidades-transporte.component.html',
-  styleUrl: './unidades-transporte.component.css'
+    selector: 'app-unidades-transporte',
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatInputModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatLabel,
+        MatTooltipModule,
+        MatIconModule,
+        MatDialogModule,
+        MatButtonModule
+    ],
+    templateUrl: './unidades-transporte.component.html',
+    styleUrl: './unidades-transporte.component.css'
 })
 export class UnidadesTransporteComponent implements OnInit {
   private unidadesService = inject(UnidadesTransporteService);

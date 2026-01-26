@@ -13,12 +13,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { Component, Inject, inject, OnInit, signal } from '@angular/core';
 
 @Component({
-  selector: 'app-servicio-dialog',
-  standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule,
-    MatDividerModule, GoogleMapsModule],
-  templateUrl: './servicio-dialog.component.html',
-  styleUrl: './servicio-dialog.component.css'
+    selector: 'app-servicio-dialog',
+    imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule,
+        MatDividerModule, GoogleMapsModule],
+    templateUrl: './servicio-dialog.component.html',
+    styleUrl: './servicio-dialog.component.css'
 })
 export class ServicioDialogComponent implements OnInit {
   private servicioService = inject(ServicioService);

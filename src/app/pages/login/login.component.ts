@@ -14,19 +14,18 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 import { NotificacionService } from '../../core/services/notificacion.service';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    LoaderComponent,
-    RouterLink
-],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        LoaderComponent,
+        RouterLink
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css'
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);

@@ -22,26 +22,25 @@ import { ServicioDialogComponent } from './components/servicio-dialog/servicio-d
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-servicios',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatTooltipModule,
-    RouterModule
-  ],
-  templateUrl: './servicios.component.html',
-  styleUrl: './servicios.component.css'
+    selector: 'app-servicios',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatTooltipModule,
+        RouterModule
+    ],
+    templateUrl: './servicios.component.html',
+    styleUrl: './servicios.component.css'
 })
 export class ServiciosComponent {
   private servicioService = inject(ServicioService);

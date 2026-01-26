@@ -27,13 +27,12 @@ import { WeatherService } from '../../../../core/services/weather.service';
 import { environment } from '../../../../../environments/environment.development';
 
 @Component({
-  selector: 'app-servicio-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatStepperModule, MatFormFieldModule,
-    MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule,
-    MatNativeDateModule, MatIconModule, RouterModule, GoogleMapsModule, MatProgressSpinnerModule],
-  templateUrl: './servicio-form.component.html',
-  styleUrl: './servicio-form.component.css'
+    selector: 'app-servicio-form',
+    imports: [CommonModule, ReactiveFormsModule, MatStepperModule, MatFormFieldModule,
+        MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule,
+        MatNativeDateModule, MatIconModule, RouterModule, GoogleMapsModule, MatProgressSpinnerModule],
+    templateUrl: './servicio-form.component.html',
+    styleUrl: './servicio-form.component.css'
 })
 export class ServicioFormComponent implements OnInit {
   private fb = inject(FormBuilder);

@@ -13,11 +13,10 @@ export type MenuItem = {
 }
 
 @Component({
-  selector: 'app-custom-sidenav',
-  standalone: true,
-  imports: [CommonModule, MatListModule, MatIconModule, RouterLinkActive, RouterLink],
-  templateUrl: './custom-sidenav.component.html',
-  styleUrl: './custom-sidenav.component.css'
+    selector: 'app-custom-sidenav',
+    imports: [CommonModule, MatListModule, MatIconModule, RouterLinkActive, RouterLink],
+    templateUrl: './custom-sidenav.component.html',
+    styleUrl: './custom-sidenav.component.css'
 })
 export class CustomSidenavComponent implements OnInit {
   private empresaService = inject(EmpresaService);

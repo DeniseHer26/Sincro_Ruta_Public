@@ -10,11 +10,10 @@ import { LoaderService } from '../../core/loader.service';
 import { LoaderComponent } from "../../components/loader/loader.component";
 
 @Component({
-  selector: 'app-main-layout',
-  standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, RouterOutlet, CustomSidenavComponent, LoaderComponent],
-  templateUrl: './main-layout.component.html',
-  styleUrl: './main-layout.component.css'
+    selector: 'app-main-layout',
+    imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, RouterOutlet, CustomSidenavComponent, LoaderComponent],
+    templateUrl: './main-layout.component.html',
+    styleUrl: './main-layout.component.css'
 })
 export class MainLayoutComponent {
   collapsed = signal(false);

@@ -6,11 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { EmpresaService } from '../../core/services/empresa.service';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+    selector: 'app-dashboard',
+    imports: [CommonModule, MatIconModule, MatButtonModule],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
   private empresaService = inject(EmpresaService);

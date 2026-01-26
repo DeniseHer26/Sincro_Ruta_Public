@@ -15,20 +15,19 @@ import { ChoferFormDialogComponent } from './components/chofer-form-dialog/chofe
 import { EliminarChoferDialogComponent } from './components/eliminar-chofer-dialog/eliminar-chofer-dialog.component';
 
 @Component({
-  selector: 'app-chofer',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule
-  ],
-  templateUrl: './chofer.component.html',
-  styleUrl: './chofer.component.css'
+    selector: 'app-chofer',
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule
+    ],
+    templateUrl: './chofer.component.html',
+    styleUrl: './chofer.component.css'
 })
 export class ChoferComponent implements OnInit {
   private choferService = inject(ChoferService);
