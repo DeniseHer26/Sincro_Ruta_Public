@@ -15,6 +15,7 @@
 .btn-primary {
   background-color: var(--logipulse-dark-blue) !important;
   color: white !important;
+  font-family: var(--logipulse-font);
 }
 
 .search-field {
@@ -34,7 +35,7 @@ table {
 }
 
 .mat-column-acciones {
-  width: 120px;
+  width: 140px;
   text-align: center;
 }
 
@@ -48,6 +49,14 @@ th.mat-header-cell {
 
 /* Efecto hover en las filas */
 tr.mat-row:hover {
-  background-color: #f1f4f9;
+  background-color: #f1f4f9 !important;
   cursor: pointer;
+}
+
+.mat-mdc-icon-button {
+  color: green;
+}
+
+.mat-mdc-icon-button:hover {
+  color: var(--logipulse-dark-blue);
 }

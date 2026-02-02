@@ -10,27 +10,14 @@
 
     <mat-step [stepControl]="infoForm" label="Información del Viaje">
       <form [formGroup]="infoForm" class="form-grid">
+  <div class="field-container">
+  <div #origenInput class="google-autocomplete-wrapper"></div>
+</div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Punto de Origen</mat-label>
-          <input matInput #origenInput
-                formControlName="puntoOrigen"
-                (input)="onInputChange('origen')"
-                placeholder="Busca una direccion de origen">
-                <mat-icon matSuffix *ngIf="origenValido()" color="primary">check_circle</mat-icon>
-                <mat-error *ngIf="!origenValido() && infoForm.get('puntoOrigen')?.touched">
-                  Debes seleccionar una direccion valida.
-                </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Punto de Destino</mat-label>
-          <input matInput #destinoInput
-                formControlName="puntoDestino"
-                (input)="onInputChange('destino')"
-                placeholder="Busca una direccion de destino">
-                <mat-icon matSuffix *ngIf="destinoValido()" color="primary">check_circle</mat-icon>
-        </mat-form-field>
+<div class="field-container">
+  <label>Destino</label>
+  <div #destinoInput class="google-autocomplete-wrapper"></div>
+</div>
 
         <mat-form-field appearance="outline">
           <mat-label>Fecha y Hora Programada</mat-label>
@@ -63,7 +50,7 @@
       <div class="stepper-actions">
         <button mat-flat-button color="primary"
                 matStepperNext
-                [disabled]="infoForm.invalid || !origenValido() || !destinoValido()">
+                [disabled]="!origenValido() || !destinoValido() || infoForm.invalid">
           Siguiente: Asignación
         </button>
       </div>

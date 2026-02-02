@@ -13,19 +13,21 @@ import { Chofer } from '../../core/interfaces/chofer.interface';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ChoferFormDialogComponent } from './components/chofer-form-dialog/chofer-form-dialog.component';
 import { EliminarChoferDialogComponent } from './components/eliminar-chofer-dialog/eliminar-chofer-dialog.component';
+import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
     selector: 'app-chofer',
     imports: [
-        CommonModule,
-        MatTableModule,
-        MatSortModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDialogModule
-    ],
+    CommonModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatTooltip
+],
     templateUrl: './chofer.component.html',
     styleUrl: './chofer.component.css'
 })

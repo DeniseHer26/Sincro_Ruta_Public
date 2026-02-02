@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, effect, ElementRef, inject, linkedSignal, OnInit, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -45,8 +45,8 @@ export class ServicioFormComponent implements OnInit {
   private directionsService = inject(MapDirectionsService);
   private weatherService = inject(WeatherService);
 
-  @ViewChild('origenInput') origenInput!: ElementRef;
-  @ViewChild('destinoInput') destinoInput!: ElementRef;
+  origenInput = viewChild<ElementRef>('origenInput');
+  destinoInput = viewChild<ElementRef>('destinoInput');
 
   // Formularios para cada paso
   infoForm!: FormGroup;
@@ -56,12 +56,18 @@ export class ServicioFormComponent implements OnInit {
   choferes = signal<Chofer[]>([]);
   unidades = signal<UnidadTransporte[]>([]);
   apiLoaded = signal(false);
-  // Señales de Validacion
-  origenValido = signal(false);
-  destinoValido = signal(false);
+  // Señales de Mapa
+  origenValido = linkedSignal({
+    source: () => this.infoForm.get('puntoOrigen')?.value,
+    computation: () => false
+  });
+  destinoValido = linkedSignal({
+    source: () => this.infoForm.get('puntoDestino')?.value,
+    computation: () => false
+  })
   // Señal para mostrar alertas de tráfico
   alertaTrafico = signal<string | null>(null);
-  //
+  // Señal para mostar el clima
   climaInfo = signal<any>(null);
 
   // Observable que guardará el resultado de la ruta
@@ -122,60 +128,93 @@ export class ServicioFormComponent implements OnInit {
   }
 
   loadGoogleMapsApi() {
-    // Si ya existe el objeto google (por una carga previa), marcamos como cargado
-    if (window.google) {
+    if (window.google?.maps && typeof window.google.maps.importLibrary === 'function') {
       this.apiLoaded.set(true);
       return;
     }
 
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=maps,marker,places&v=beta`;
+    const params = new URLSearchParams({
+      key: environment.googleMapsApiKey,
+      v: 'beta',
+      loading: 'async',
+      libraries: 'places, marker'
+    });
+
+    (window as any).initMap = () => {};
+
+    script.src = `https://maps.googleapis.com/maps/api/js?${params.toString()}`;
     script.async = true;
     script.defer = true;
 
-    // Escuchar el evento de carga del script
     script.onload = () => {
-      this.apiLoaded.set(true);
-      console.log('Google Maps API cargada exitosamente');
+      if(window.google?.maps && typeof window.google.maps.importLibrary === 'function') {
+        this.apiLoaded.set(true);
+        console.log('Google Maps nativo cargado correctamente');
+      } else {
+        this.notify.showError('La API cargo pero no inicializo correctamente.')
+      }
     };
 
-    // Manejo de errores de carga
     script.onerror = () => {
-      this.notify.showError('No se pudo cargar la API de mapas. Verifica tu conexión.');
+      this.notify.showError('No se pudo conectar con Google Maps');
     };
-
     document.head.appendChild(script);
   }
 
-  initAutocomplete() {
-    const options = {
-      componentRestrictions: { country: 'mx' }, // Restringido a México para SincroRuta
-      fields: ['address_components', 'formatted_address', 'geometry', 'name'],
-      types: ['address']
-    };
+  async initAutocomplete() {
+    // Validacioon de seguridad
+    if(!this.apiLoaded() || !window.google?.maps?.importLibrary) return;
+    // 1. Cargamos la librería. Usamos 'any' para evitar bloqueos de TS.
+    const { PlaceAutocompleteElement } = await google.maps.importLibrary("places") as any;
 
-    const autocompleteOrigen = new google.maps.places.Autocomplete(this.origenInput.nativeElement, options);
-    const autocompleteDestino = new google.maps.places.Autocomplete(this.destinoInput.nativeElement, options);
+    if (!PlaceAutocompleteElement) {
+      console.error('PlaceAutocompleteElement no disponible en esta versión de la API');
+      return;
+    }
 
-    // Evento al seleccionar dirección de origen
-    autocompleteOrigen.addListener('place_changed', () => {
-      const place = autocompleteOrigen.getPlace();
-      if(place.geometry) {
-        this.infoForm.patchValue({ puntoOrigen: place.formatted_address });
+    const elOrigen = this.origenInput()?.nativeElement;
+    const elDestino = this.destinoInput()?.nativeElement;
+
+    if (!elOrigen || !elDestino) return;
+
+    // 2. Limpiamos el contenedor antes de añadir para evitar duplicados por HMR de Angular 19
+    elOrigen.innerHTML = '';
+    elDestino.innerHTML = '';
+
+    // 3. Instanciamos los componentes
+    const autocompleteOrigen = new PlaceAutocompleteElement();
+    const autocompleteDestino = new PlaceAutocompleteElement();
+
+    // 4. Configuramos las restricciones (México)
+    autocompleteOrigen.includedRegionCodes = ['mx'];
+    autocompleteDestino.includedRegionCodes = ['mx'];
+
+    // 5. Los añadimos al DOM
+    elOrigen.appendChild(autocompleteOrigen);
+    elDestino.appendChild(autocompleteDestino);
+
+    // 6. Escuchamos el evento 'gmp-placeselect'
+    autocompleteOrigen.addEventListener('gmp-placeselect', async (event: any) => {
+      const place = event.place;
+      if(!place) return;
+      // La nueva API de Place requiere llamar a fetchFields para obtener la dirección formateada
+      await place.fetchFields({ fields: ['formattedAddress', 'geometry'] });
+
+      if (place.formattedAddress) {
+        this.infoForm.patchValue({ puntoOrigen: place.formattedAddress });
         this.origenValido.set(true);
-      } else {
-        this.origenValido.set(false);
       }
     });
 
-    // Evento al seleccionar direccion de destino
-    autocompleteDestino.addListener('place_changed', () => {
-      const place = autocompleteDestino.getPlace();
-      if(place.geometry) {
-        this.infoForm.patchValue({ puntoDestino: place.formatted_address });
-       this.destinoValido.set(true);
-      } else {
-        this.destinoValido.set(false);
+    autocompleteDestino.addEventListener('gmp-placeselect', async (event: any) => {
+      const place = event.place;
+      if(!place) return;
+      await place.fetchFields({ fields: ['formattedAddress', 'geometry'] });
+
+      if (place.formattedAddress) {
+        this.infoForm.patchValue({ puntoDestino: place.formattedAddress });
+        this.destinoValido.set(true);
       }
     });
   }
