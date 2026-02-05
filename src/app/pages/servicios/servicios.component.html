@@ -37,7 +37,7 @@
     </form>
   </div>
 
-  <mat-form-field appearance="outline" class="full-width">
+  <mat-form-field appearance="outline" class="search-field">
     <mat-label>Búsqueda rápida (Origen, Destino, ID...)</mat-label>
     <input matInput (keyup)="aplicarBusqueda($event)" placeholder="Ej. Ciudad de México">
     <mat-icon matSuffix>search</mat-icon>
@@ -92,6 +92,7 @@
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let s">
+          <div class="action-buttons-container">
           <button mat-icon-button color="primary"
                   (click)="detalleServicio(s)"
                   matTooltip="Ver detalles">
@@ -103,6 +104,7 @@
                   matTooltip="Cancelar Servicio">
             <mat-icon>block</mat-icon>
           </button>
+          </div>
         </td>
       </ng-container>
 

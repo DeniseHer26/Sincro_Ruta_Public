@@ -10,28 +10,43 @@
 
     <mat-step [stepControl]="infoForm" label="Información del Viaje">
       <form [formGroup]="infoForm" class="form-grid">
-  <div class="field-container">
-  <div #origenInput class="google-autocomplete-wrapper"></div>
-</div>
+        <div class="field-container">
+          <label>Punto de Origen</label>
+          <div #origenInput class="google-autocomplete-wrapper"></div>
+        </div>
 
-<div class="field-container">
-  <label>Destino</label>
-  <div #destinoInput class="google-autocomplete-wrapper"></div>
-</div>
+        <div class="field-container">
+          <label>Punto de Destino</label>
+          <div #destinoInput class="google-autocomplete-wrapper"></div>
+        </div>
 
         <mat-form-field appearance="outline">
-          <mat-label>Fecha y Hora Programada</mat-label>
-          <input matInput [matDatepicker]="pickerInicio" formControlName="fechaHoraProgramada" [min]="today">
+          <mat-label>Fecha de Salida</mat-label>
+          <input matInput [matDatepicker]="pickerInicio" formControlName="fechaSalida" [min]="today">
           <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
           <mat-datepicker #pickerInicio></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Llegada Estimada</mat-label>
-          <input matInput [matDatepicker]="pickerFin" formControlName="fechaHoraLlegadaEstimada"
+          <mat-label>Hora de Salida</mat-label>
+          <input matInput [matTimepicker]="timepickerSalida" formControlName="horaSalida">
+          <mat-timepicker #timepickerSalida/>
+          <mat-timepicker-toggle [for]="timepickerSalida" matSuffix/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Llegada</mat-label>
+          <input matInput [matDatepicker]="pickerFin" formControlName="fechaLlegada"
                  [min]="infoForm.get('fechaHoraProgramada')?.value || today">
           <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
           <mat-datepicker #pickerFin></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hora de Llegada</mat-label>
+          <input matInput [matTimepicker]="timepickerLlegada" formControlName="horaLlegada">
+          <mat-timepicker #timepickerLlegada/>
+          <mat-timepicker-toggle [for]="timepickerLlegada" matSuffix/>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">

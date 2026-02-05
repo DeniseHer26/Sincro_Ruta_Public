@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, inject, linkedSignal, OnInit, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, linkedSignal, OnInit, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
@@ -28,12 +30,15 @@ import { environment } from '../../../../../environments/environment.development
 
 @Component({
     selector: 'app-servicio-form',
+    providers: [provideNativeDateAdapter()],
     imports: [CommonModule, ReactiveFormsModule, MatStepperModule, MatFormFieldModule,
-        MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule,
+        MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule, MatTimepickerModule,
         MatNativeDateModule, MatIconModule, RouterModule, GoogleMapsModule, MatProgressSpinnerModule],
+        changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './servicio-form.component.html',
     styleUrl: './servicio-form.component.css'
 })
+
 export class ServicioFormComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
@@ -98,8 +103,10 @@ export class ServicioFormComponent implements OnInit {
     this.infoForm = this.fb.group({
       puntoOrigen: ['', Validators.required],
       puntoDestino: ['', Validators.required],
-      fechaHoraProgramada: ['', Validators.required],
-      fechaHoraLlegadaEstimada: ['', Validators.required],
+      fechaSalida: [new Date(), Validators.required],
+      horaSalida: ['', Validators.required],
+      fechaLlegada: [new Date(), Validators.required],
+      horaLlegada: ['', Validators.required],
       descripcionMercancia: ['', Validators.required],
       costo: [null, [Validators.required, Validators.min(0.01)]]
     });
